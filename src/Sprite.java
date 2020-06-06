@@ -1,17 +1,14 @@
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
-import java.io.InputStream;
+import java.util.Collection;
 
-abstract public class Sprite extends ImageView {
-    public Sprite() {
-    }
-
-    public Sprite(String url) {
-        super(url);
-    }
-
-    public Sprite(Image image) {
-        super(image);
+class Sprite extends Pane {
+    public Sprite(String imageName) {
+        Image image = new Image(imageName);
+        ImageView iv = new ImageView(image);
+        getChildren().add(iv);
     }
 }
