@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -10,8 +11,12 @@ import java.util.ArrayList;
 
 public class Galaxy extends Application {
     int board_size = 12;
+    int planet_quantity = 4;
     Node[][] gridPaneNodes = new Node[board_size][board_size];
     GridPane gp;
+    Node spaceshipNode;
+    Node[][] planetNodes = new Node[planet_quantity][planet_quantity];
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -61,12 +66,43 @@ public class Galaxy extends Application {
                 gridPaneNodes[column][row] = child;
             }
         }
-
+//location of spaceship
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
-                System.out.println(gridPaneNodes[i][j]);
+                if (gridPaneNodes[i][j] instanceof Spaceship){
+                    spaceshipNode = gridPaneNodes [i][j];
+                }
             }
         }
+        //location of planet
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                if (gridPaneNodes[i][j] instanceof Planet) {
+                        Integer column = GridPane.getColumnIndex(gridPaneNodes[i][j]);
+                        Integer row = GridPane.getRowIndex(gridPaneNodes[i][j]);
+//                    System.out.println(column);
+//                    System.out.println(row);
+                    for (int x = 0; x < 4; x++) {
+                        planetNodes[x][x] = gridPaneNodes[column][row];
+                    }
+                }
+            }
+        }
+//        to show contents of gridPaneNodes array
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.println(planetNodes[i][j]);
+            }
+        }
+
+
+
+//        //to show contents of gridPaneNodes array
+//        for (int i = 0; i < 12; i++) {
+//            for (int j = 0; j < 12; j++) {
+//                System.out.println(gridPaneNodes[i][j]);
+//            }
+//        }
 
         Scene sc = new Scene(gp, 612, 612);
         stage.setScene(sc);
