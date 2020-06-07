@@ -40,7 +40,9 @@ public class Galaxy extends Application {
         //adds 5 meteorites at random locations
         addObject(5, "meteorite");
 
-
+        // if all planets visited , add wormhole
+        //addObject(1, "wormhole");
+        
         gp.setStyle("-fx-background-image: url('wp1.jpg');");
 
 // this function lists the content of our gridPaneNodes[][] for debugging purposes
