@@ -6,12 +6,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-
 public class Galaxy extends Application {
     int board_size = 12;
     Node[][] gridPaneNodes = new Node[board_size][board_size];
     GridPane gp;
-
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -52,8 +50,8 @@ public class Galaxy extends Application {
 //            }
 //        }
 
-        Scene sc = new Scene(gp, 612, 612);
-        stage.setScene(sc);
+        Scene scene = new Scene(gp, 612, 612);
+        stage.setScene(scene);
         stage.show();
     }
 
@@ -61,19 +59,14 @@ public class Galaxy extends Application {
         //@todo add some scan/move function here to scan the surrounding grids and move using posX and posY +1 or -1
     }
 
-    // add objects to playfield
-
     public void addObject(int amount, String string) {
         int i = 0;
         while (i < amount) {
             int posX = (int) Math.floor(Math.random() * 12);
             int posY = (int) Math.floor(Math.random() * 12);
 
-            Integer column = GridPane.getColumnIndex(gp);
-            Integer row = GridPane.getRowIndex(gp);
-
             if (gridPaneNodes[posX][posY] == null) {
-                Sprite anySprite = null;
+                Sprite anySprite;
                 switch (string) {
                     case "meteorite":
                         anySprite = new Meteorite();
@@ -94,7 +87,5 @@ public class Galaxy extends Application {
                 i++;
             }
         }
-
-
     }
 }
