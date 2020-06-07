@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Galaxy extends Application {
     int board_size = 12;
     Node[][] gridPaneNodes = new Node[board_size][board_size];
@@ -32,16 +34,17 @@ public class Galaxy extends Application {
         gp.add(space,0,0);
 
         //adds 4 planets at random locations ---->> STILL NEED A WAY TO CHECK WHETHER A NODE IS EMPTY BEFORE PLACING A PLANET!!!!
+
         for (int i = 1; i < 5; i++){
-            int posX = (int) Math.floor(Math.random() * 13);
-            int posY = (int) Math.floor(Math.random() * 13);
+            int posX = (int) Math.floor(Math.random() * 12);
+            int posY = (int) Math.floor(Math.random() * 12);
             Planet planet = new Planet();
             gp.add(planet, posX, posY);
         }
         //adds 5 meteorites at random locations -->> STILL NEED A WAY TO CHECK WHETHER A NODE IS EMPTY BEFORE PLACING A METEORITE!!!!
         for (int i = 1; i < 6; i++){
-            int posX = (int) Math.floor(Math.random() * 13);
-            int posY = (int) Math.floor(Math.random() * 13);
+            int posX = (int) Math.floor(Math.random() * 12);
+            int posY = (int) Math.floor(Math.random() * 12);
             Meteorite meteorite = new Meteorite();
             gp.add(meteorite, posX, posY);
         }
@@ -49,15 +52,22 @@ public class Galaxy extends Application {
 //        System.out.println(gp.getRowIndex(space));
 
         gp.setStyle("-fx-background-image: url('wp1.jpg');"); // background is behind the rectangles...
+
         //scan each node (child) and store the position in array
-        for(Node child :gp.getChildren()) {
+        for(Node child : gp.getChildren()) {
             Integer column = GridPane.getColumnIndex(child);
             Integer row = GridPane.getRowIndex(child);
             if (column != null && row != null) {
                 gridPaneNodes[column][row] = child;
             }
         }
-//        System.out.println(gridPaneNodes[0][0]);
+
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                System.out.println(gridPaneNodes[i][j]);
+            }
+        }
+
         Scene sc = new Scene(gp, 612, 612);
         stage.setScene(sc);
         stage.show();
