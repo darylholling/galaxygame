@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -7,15 +6,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 
 public class Galaxy extends Application {
     int board_size = 12;
-    int planet_quantity = 4;
     Node[][] gridPaneNodes = new Node[board_size][board_size];
     GridPane gp;
-    Node spaceshipNode;
-    Node[][] planetNodes = new Node[planet_quantity][planet_quantity];
 
 
     @Override
@@ -36,70 +31,21 @@ public class Galaxy extends Application {
         }
         // add spaceship
         Spaceship space = new Spaceship();
-        gp.add(space,0,0);
+        gp.add(space, 0, 0);
+        gridPaneNodes[0][0] = space;
 
-        //adds 4 planets at random locations ---->> STILL NEED A WAY TO CHECK WHETHER A NODE IS EMPTY BEFORE PLACING A PLANET!!!!
+//        adds 4 planets at random locations
+        addObject(4, "planet");
 
-        for (int i = 1; i < 5; i++){
-            int posX = (int) Math.floor(Math.random() * 12);
-            int posY = (int) Math.floor(Math.random() * 12);
-            Planet planet = new Planet();
-            gp.add(planet, posX, posY);
-        }
-        //adds 5 meteorites at random locations -->> STILL NEED A WAY TO CHECK WHETHER A NODE IS EMPTY BEFORE PLACING A METEORITE!!!!
-        for (int i = 1; i < 6; i++){
-            int posX = (int) Math.floor(Math.random() * 12);
-            int posY = (int) Math.floor(Math.random() * 12);
-            Meteorite meteorite = new Meteorite();
-            gp.add(meteorite, posX, posY);
-        }
-//        System.out.println(GridPane.getColumnIndex(space));
-//        System.out.println(gp.getRowIndex(space));
-
-        gp.setStyle("-fx-background-image: url('wp1.jpg');"); // background is behind the rectangles...
-
-        //scan each node (child) and store the position in array
-        for(Node child : gp.getChildren()) {
-            Integer column = GridPane.getColumnIndex(child);
-            Integer row = GridPane.getRowIndex(child);
-            if (column != null && row != null) {
-                gridPaneNodes[column][row] = child;
-            }
-        }
-//location of spaceship
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
-                if (gridPaneNodes[i][j] instanceof Spaceship){
-                    spaceshipNode = gridPaneNodes [i][j];
-                }
-            }
-        }
-        //location of planet
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
-                if (gridPaneNodes[i][j] instanceof Planet) {
-                        Integer column = GridPane.getColumnIndex(gridPaneNodes[i][j]);
-                        Integer row = GridPane.getRowIndex(gridPaneNodes[i][j]);
-//                    System.out.println(column);
-//                    System.out.println(row);
-                    for (int x = 0; x < 4; x++) {
-                        planetNodes[x][x] = gridPaneNodes[column][row];
-                    }
-                }
-            }
-        }
-//        to show contents of gridPaneNodes array
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.println(planetNodes[i][j]);
-            }
-        }
+        //adds 5 meteorites at random locations
+        addObject(5, "meteorite");
 
 
+        gp.setStyle("-fx-background-image: url('wp1.jpg');");
 
-//        //to show contents of gridPaneNodes array
-//        for (int i = 0; i < 12; i++) {
-//            for (int j = 0; j < 12; j++) {
+// this function lists the content of our gridPaneNodes[][] for debugging purposes
+//        for (int i = 0; i < board_size; i++) {
+//            for (int j = 0; j < board_size; j++) {
 //                System.out.println(gridPaneNodes[i][j]);
 //            }
 //        }
@@ -108,7 +54,45 @@ public class Galaxy extends Application {
         stage.setScene(sc);
         stage.show();
     }
-    public void move(Sprite sprite, int posX, int posY, GridPane gridPane){
-        //some scan/move function here to scan the surrounding grids and move using posX and posY +1 or -1
+
+    public void move(Sprite sprite, int posX, int posY, GridPane gridPane) {
+        //@todo add some scan/move function here to scan the surrounding grids and move using posX and posY +1 or -1
+    }
+
+    // add objects to playfield
+
+    public void addObject(int amount, String string) {
+        int i = 0;
+        while (i < amount) {
+            int posX = (int) Math.floor(Math.random() * 12);
+            int posY = (int) Math.floor(Math.random() * 12);
+
+            Integer column = GridPane.getColumnIndex(gp);
+            Integer row = GridPane.getRowIndex(gp);
+
+            if (gridPaneNodes[posX][posY] == null) {
+                Sprite anySprite = null;
+                switch (string) {
+                    case "meteorite":
+                        anySprite = new Meteorite();
+                        break;
+                    case "planet":
+                        anySprite = new Planet();
+                        break;
+                    case "wormhole":
+                        anySprite = new Wormhole();
+                        break;
+                    default:
+                        //@todo handle exception maybe??
+                        System.out.println("invalid input");
+                        return;
+                }
+                gp.add(anySprite, posX, posY);
+                gridPaneNodes[posX][posY] = anySprite;
+                i++;
+            }
+        }
+
+
     }
 }
