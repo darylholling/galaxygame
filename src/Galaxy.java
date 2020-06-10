@@ -13,6 +13,7 @@ public class Galaxy extends Application {
         gp = new GridPane();
         gp.setGridLinesVisible(true);
         gp.setPrefSize(600, 600);
+        Spaceship spaceship = new Spaceship();
 
 //        initialize playfield
         for (int i = 0; i < board_size; i++) {
@@ -33,7 +34,6 @@ public class Galaxy extends Application {
             for (int j = 0; j < board_size; j++) {
 
                 if (i == 0 && j == 0) {
-                    Spaceship spaceship = new Spaceship();
                     spaceship.setLocation(gridPaneNodes[i][j]);
                 }
 
@@ -56,7 +56,8 @@ public class Galaxy extends Application {
         }
 
         // add spaceship
-
+//druk op D
+        spaceship.setLocation(spaceship.getLocation().getRight());
 //        Spaceship spaceship = new Spaceship();
 
 //        gp.add(spaceship, 0, 0);
