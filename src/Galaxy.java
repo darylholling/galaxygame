@@ -4,8 +4,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Galaxy extends Application {
-    int board_size = 12;
-    Location[][] gridPaneNodes = new Location[board_size][board_size];
     GridPane gp;
 
     @Override
@@ -13,51 +11,19 @@ public class Galaxy extends Application {
         gp = new GridPane();
         gp.setGridLinesVisible(true);
         gp.setPrefSize(600, 600);
-        Spaceship spaceship = new Spaceship();
 
-//        initialize playfield
-        for (int i = 0; i < board_size; i++) {
-            for (int j = 0; j < board_size; j++) {
-                gridPaneNodes[i][j] = new Location();
-
-                gridPaneNodes[i][j].setI(i);
-                gridPaneNodes[i][j].setJ(j);
-
-//                Rectangle tile = new Rectangle(50, 50);
-//                tile.setFill(Color.TRANSPARENT);
-//                tile.setStroke(Color.BLACK);
-//                gp.add(tile, i, j);
-            }
-        }
-
-        for (int i = 0; i < board_size; i++) {
-            for (int j = 0; j < board_size; j++) {
-
-                if (i == 0 && j == 0) {
-                    spaceship.setLocation(gridPaneNodes[i][j]);
-                }
-
-                if (i + 1 < board_size){
-                    gridPaneNodes[i][j].setRight(gridPaneNodes[i + 1][j]);
-                }
-
-                if (i - 1 < board_size && i -1 > 0){
-                    gridPaneNodes[i][j].setLeft(gridPaneNodes[i - 1][j]);
-                }
-
-                if (j + 1 < board_size){
-                    gridPaneNodes[i][j].setDown(gridPaneNodes[i][j + 1]);
-                }
-
-                if (j - 1 < board_size && j -1 > 0){
-                    gridPaneNodes[i][j].setUp(gridPaneNodes[i][j - 1]);
-                }
-            }
-        }
+        LocationService locationService = new LocationService();
+        Location[][] gridPaneNodes = locationService.initalize();
 
         // add spaceship
-//druk op D
+        Spaceship spaceship = new Spaceship();
+        spaceship.setLocation(gridPaneNodes[0][0]);
+
+        //druk op D
         spaceship.setLocation(spaceship.getLocation().getRight());
+
+        System.out.println(gridPaneNodes[5][5].getRight().getX());
+        System.out.println(gridPaneNodes[5][5].getRight().getY());
 //        Spaceship spaceship = new Spaceship();
 
 //        gp.add(spaceship, 0, 0);

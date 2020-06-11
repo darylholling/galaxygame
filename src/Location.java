@@ -1,13 +1,16 @@
-import javafx.scene.Node;
-
 public class Location {
     private Location up;
     private Location right;
     private Location down;
     private Location left;
 
-    private int i;
-    private int j;
+    private int x;
+    private int y;
+
+    public Location(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public Location getRight() {
         return right;
@@ -41,19 +44,19 @@ public class Location {
         this.left = left;
     }
 
-    public int getI() {
-        return i;
+    public int getX() {
+        return x;
     }
 
-    public void setI(int i) {
-        this.i = i;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public int getJ() {
-        return j;
+    public int getY() {
+        return y;
     }
 
-    public void setJ(int j) {
-        this.j = j;
+    public void setY(int y) {
+        this.y = y;
     }
 }
