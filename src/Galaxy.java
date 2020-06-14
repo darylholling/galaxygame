@@ -23,6 +23,7 @@ public class Galaxy extends Application {
         gp.add(spaceship, spaceship.getLocation().getColumn(), spaceship.getLocation().getRow());
 
 
+
 //        adds 4 planets at random locations
         addObject(location, 4, "planet");
 
@@ -40,7 +41,9 @@ public class Galaxy extends Application {
             @Override
             public void handle(KeyEvent keyEvent) {
                 switch(keyEvent.getCode()){
-                    case UP: moveUp(spaceship, spaceship.getLocation().getUp().getColumn(),spaceship.getLocation().getUp().getRow()); break;
+                    case UP: moveUp(spaceship, spaceship.getLocation().getUp().getColumn(),spaceship.getLocation().getUp().getRow());
+//                        System.out.println("column"+ spaceship.getLocation().getUp().getColumn());
+//                        System.out.println(spaceship.getLocation().getUp().getRow());break;
                     case DOWN: moveDown(spaceship, spaceship.getLocation().getDown().getColumn(),spaceship.getLocation().getDown().getRow()); break;
                     case LEFT: moveLeft(spaceship, spaceship.getLocation().getLeft().getColumn(),spaceship.getLocation().getLeft().getRow()); break;
                     case RIGHT: moveRight(spaceship, spaceship.getLocation().getRight().getColumn(),spaceship.getLocation().getRight().getRow()); break;
@@ -52,6 +55,7 @@ public class Galaxy extends Application {
     //move spaceship around with arrows
 
     public void move(Sprite sprite, Location[][] location, int column, int row){
+
             sprite.setLocation(location[column][row]);
             gp.setColumnIndex(sprite, column);
             gp.setRowIndex(sprite, row);
@@ -101,6 +105,7 @@ public class Galaxy extends Application {
         move(sprite, location, column, row);
         gp.getChildren().remove(location[column][row]);
         ImageView image = new ImageView("planetvisited.png");
+        image.toBack();
         gp.add(image, column, row);
         planetScore ++;
         if (planetScore == 4){
