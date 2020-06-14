@@ -52,11 +52,9 @@ public class Galaxy extends Application {
     //move spaceship around with arrows
 
     public void move(Sprite sprite, Location[][] location, int column, int row){
-        sprite.setLocation(location[column][row]);
-        gp.setColumnIndex(sprite, column);
-        gp.setRowIndex(sprite, row);
-
-//        gp.add(sprite, sprite.getLocation().getColumn(), sprite.getLocation().getColumn());
+            sprite.setLocation(location[column][row]);
+            gp.setColumnIndex(sprite, column);
+            gp.setRowIndex(sprite, row);
     }
     public void moveUp(Sprite sprite, int column , int row) {
         int rowCheck = (Math.max(row, 0));
