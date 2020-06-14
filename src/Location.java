@@ -1,4 +1,6 @@
-public class Location {
+import javafx.scene.Node;
+
+public class Location extends Node {
     private Location up;
     private Location right;
     private Location down;
