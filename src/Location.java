@@ -1,4 +1,3 @@
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 public class Location extends Pane {
@@ -9,6 +8,8 @@ public class Location extends Pane {
 
     private int column;
     private int row;
+
+    private Sprite sprite;
 
     public Location(int column, int row) {
         this.column = column;
@@ -61,5 +62,13 @@ public class Location extends Pane {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    public boolean hasSprite() {
+        return sprite != null;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
     }
 }

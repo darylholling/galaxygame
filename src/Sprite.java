@@ -17,5 +17,6 @@ class Sprite extends Pane {
 
     public void setLocation(Location location) {
         this.location = location;
+        this.location.setSprite(this);
     }
 }
