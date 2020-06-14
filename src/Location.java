@@ -67,6 +67,12 @@ public class Location extends Pane {
     public boolean hasSprite() {
         return sprite != null;
     }
+    public boolean hasPlanet() {
+        return sprite instanceof Planet;
+    }
+    public boolean hasMeteorite() {
+        return sprite instanceof Meteorite;
+    }
 
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
