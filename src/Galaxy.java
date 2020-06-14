@@ -104,7 +104,7 @@ public class Galaxy extends Application {
 
     public void visitPlanet(Sprite sprite, int column, int row){
         move(sprite, location, column, row);
-        gp.getChildren().remove(location[column][row]);
+//        gp.getChildren().remove(location[column][row]);
         ImageView image = new ImageView("planetvisited.png");
         image.toBack();
         gp.add(image, column, row);
