@@ -1,21 +1,26 @@
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 public class LocationService {
     int board_size = 12;
 
-    public Location[][] initalize() {
+    public Location[][] initalize(GridPane gp) {
         Location[][] gridPaneNodes = new Location[board_size][board_size];
         //        initialize playfield
         for (int i = 0; i < board_size; i++) {
             for (int j = 0; j < board_size; j++) {
                 gridPaneNodes[i][j] = new Location(i, j);
-//                Rectangle tile = new Rectangle(50, 50);
-//                tile.setFill(Color.TRANSPARENT);
-//                tile.setStroke(Color.BLACK);
-//                gp.add(tile, i, j);
+                Rectangle tile = new Rectangle(50, 50);
+                tile.setFill(Color.TRANSPARENT);
+                gp.add(tile, i, j);
             }
         }
 
         for (int i = 0; i < board_size; i++) {
             for (int j = 0; j < board_size; j++) {
+                gp.setColumnIndex(gridPaneNodes[i][j], i);
+                gp.setRowIndex(gridPaneNodes[i][j], j);
                 if (i + 1 < board_size) {
                     gridPaneNodes[i][j].setRight(gridPaneNodes[i + 1][j]);
                 }

@@ -1,17 +1,18 @@
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
-public class Location extends Node {
+public class Location extends Pane {
     private Location up;
     private Location right;
     private Location down;
     private Location left;
 
-    private int x;
-    private int y;
+    private int column;
+    private int row;
 
-    public Location(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Location(int column, int row) {
+        this.column = column;
+        this.row = row;
     }
 
     public Location getRight() {
@@ -46,19 +47,19 @@ public class Location extends Node {
         this.left = left;
     }
 
-    public int getX() {
-        return x;
+    public int getColumn() {
+        return column;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setColumn(int column) {
+        this.column = column;
     }
 
-    public int getY() {
-        return y;
+    public int getRow() {
+        return row;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setRow(int row) {
+        this.row = row;
     }
 }

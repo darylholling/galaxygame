@@ -11,38 +11,40 @@ public class Galaxy extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         gp = new GridPane();
-        gp.setGridLinesVisible(true);
+//        gp.setGridLinesVisible(true);
         gp.setPrefSize(600, 600);
 
         LocationService locationService = new LocationService();
-        Location[][] gridPaneNodes = locationService.initalize();
+        Location[][] gridPaneNodes = locationService.initalize(gp);
 
         // add spaceship
         Spaceship spaceship = new Spaceship();
-//        spaceship.setLocation(gridPaneNodes[0][0]);
+        spaceship.setLocation(gridPaneNodes[0][0]);
         gp.add(spaceship,0,0);
-        gp.setColumnIndex(spaceship, (gp.getColumnIndex(spaceship)+1));
-        gp.setRowIndex(spaceship,  gp.getRowIndex(spaceship));
+        gp.setColumnIndex(spaceship, spaceship.getLocation().getRight().getColumn());
+//        gp.setRowIndex(spaceship,  gp.getRowIndex(spaceship));
         System.out.println(gp.getColumnIndex(spaceship));
+
 
         //druk op D
 
-        for (int i = 0; i < board_size; i++) {
-            for (int j = 0; j < board_size; j++) {
-//                gridPaneNodes[i][j] = new Location(i, j);
-                Rectangle tile = new Rectangle(50, 50);
-                tile.setFill(Color.TRANSPARENT);
-//                tile.setStroke(Color.BLACK);
-                gp.add(tile,i,j);
+//        for (int i = 0; i < board_size; i++) {
+//            for (int j = 0; j < board_size; j++) {
+////                gridPaneNodes[i][j] = new Location(i, j);
+//                Rectangle tile = new Rectangle(50, 50);
+//                tile.setFill(Color.TRANSPARENT);
+////                tile.setStroke(Color.BLACK);
+//                gp.add(tile,i,j);
+//
+//            }
+//        }
 
-            }
-        }
-
+//
 //        for (int i = 0; i < board_size; i++) {
 //            for (int j = 0; j < board_size; j++) {
 //                if (i + 1 < board_size) {
 //                    //setright
-//                    gp.setColumnIndex(spaceship, gp.getColumnIndex(spaceship)+1);
+//                    gp.setColumnIndex(spaceship, (gp.getColumnIndex(spaceship)+1));
 //                    gp.setRowIndex(spaceship,  gp.getRowIndex(spaceship));
 //                }
 //
