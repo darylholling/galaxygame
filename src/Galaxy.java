@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 public class Galaxy extends Application {
     GridPane gp;
-    int board_size = 12;
     int planetScore = 0;
     Location[][] location;
     @Override
@@ -21,7 +20,7 @@ public class Galaxy extends Application {
         // add spaceship
         Spaceship spaceship = new Spaceship();
         spaceship.setLocation(location[0][0]);
-        gp.add(spaceship, spaceship.getLocation().getColumn(), spaceship.getLocation().getColumn());
+        gp.add(spaceship, spaceship.getLocation().getColumn(), spaceship.getLocation().getRow());
 
 
 //        adds 4 planets at random locations
@@ -30,8 +29,6 @@ public class Galaxy extends Application {
 //        //adds 5 meteorites at random locations
         addObject(location,5, "meteorite");
 
-        // if all planets visited , add wormhole
-        //addObject(location, 1, "wormhole");
 
         gp.setStyle("-fx-background-image: url('wp1.jpg');");
 
@@ -54,52 +51,51 @@ public class Galaxy extends Application {
 
     //move spaceship around with arrows
 
-    public void move(Sprite sprite, Location[][] location, int column, int row, int columnAfter, int RowAfter){
+    public void move(Sprite sprite, Location[][] location, int column, int row){
         sprite.setLocation(location[column][row]);
-        gp.add(sprite, sprite.getLocation().getColumn(), sprite.getLocation().getColumn());
+        gp.setColumnIndex(sprite, column);
+        gp.setRowIndex(sprite, row);
+
+//        gp.add(sprite, sprite.getLocation().getColumn(), sprite.getLocation().getColumn());
     }
     public void moveUp(Sprite sprite, int column , int row) {
-        int rowAfter = (row == 0 ? 0 : (row-1));
-        int columnAfter = column;
-        if (location[columnAfter][rowAfter].hasPlanet() && rowAfter >= 0){
+        int rowCheck = (Math.max(row, 0));
+        if (location[column][rowCheck].hasPlanet() && row > 0){
             visitPlanet(sprite, column, row);}
-        else if (location[columnAfter][rowAfter].hasMeteorite() || rowAfter < 0) {
+        else if (location[column][rowCheck].hasMeteorite()) {
             System.out.println("DEAD"); //@todo: gameover
         } else {
-            move(sprite, location, column, row, columnAfter, rowAfter);
+            move(sprite, location, column, row);
         }
     }
     public void moveDown(Sprite sprite, int column, int row) {
-        int rowAfter = (row == 11 ? 11 : (row+1));
-        int columnAfter = column;
-        if (location[columnAfter][rowAfter].hasPlanet() && rowAfter < 12){
+        int rowCheck = (Math.min(row, 11));
+        if (location[column][rowCheck].hasPlanet() && row < 12){
             visitPlanet(sprite, column, row);}
-        else if (location[columnAfter][rowAfter].hasMeteorite()|| (rowAfter > 11)) {
+        else if (location[column][rowCheck].hasMeteorite()) {
             System.out.println("DEAD"); //@todo: gameover
         } else {
-            move(sprite, location, column, row, columnAfter, rowAfter);
+            move(sprite, location, column, row);
         }
     }
     public void moveLeft(Sprite sprite, int column, int row) {
-        int columnAfter = (column == 0 ? 0 : (column-1));
-        int rowAfter = row;
-        if (location[columnAfter][rowAfter].hasPlanet() && columnAfter >= 0){
+        int columnCheck = (Math.max(column, 0));
+        if (location[columnCheck][row].hasPlanet() && column > 0){
             visitPlanet(sprite, column, row);}
-        else if (location[columnAfter][rowAfter].hasMeteorite() || (columnAfter < 0)) {
+        else if (location[columnCheck][row].hasMeteorite()) {
             System.out.println("DEAD"); //@todo: gameover
         } else {
-            move(sprite, location, column, row, columnAfter, rowAfter);
+            move(sprite, location, column, row);
         }
     }
     public void moveRight(Sprite sprite, int column, int row) {
-        int columnAfter = (column == 11 ? 11 : (column+1));
-        int rowAfter = row ;
-        if (location[columnAfter][rowAfter].hasPlanet() && columnAfter <12 ){
+        int columnCheck = (Math.min(column, 11));
+        if (location[columnCheck][row].hasPlanet() && column <12 ){
             visitPlanet(sprite, column, row);}
-        else if (location[columnAfter][rowAfter].hasMeteorite() || (columnAfter > 11)) {
+        else if (location[columnCheck][row].hasMeteorite()) {
             System.out.println("DEAD"); //@todo: gameover
         } else {
-            move(sprite, location, column, row, columnAfter, rowAfter);
+            move(sprite, location, column, row);
         }
     }
 
