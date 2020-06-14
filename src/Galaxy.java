@@ -43,7 +43,8 @@ public class Galaxy extends Application {
                 switch(keyEvent.getCode()){
                     case UP: moveUp(spaceship, spaceship.getLocation().getUp().getColumn(),spaceship.getLocation().getUp().getRow());
 //                        System.out.println("column"+ spaceship.getLocation().getUp().getColumn());
-//                        System.out.println(spaceship.getLocation().getUp().getRow());break;
+//                        System.out.println(spaceship.getLocation().getUp().getRow());
+                        break;
                     case DOWN: moveDown(spaceship, spaceship.getLocation().getDown().getColumn(),spaceship.getLocation().getDown().getRow()); break;
                     case LEFT: moveLeft(spaceship, spaceship.getLocation().getLeft().getColumn(),spaceship.getLocation().getLeft().getRow()); break;
                     case RIGHT: moveRight(spaceship, spaceship.getLocation().getRight().getColumn(),spaceship.getLocation().getRight().getRow()); break;
