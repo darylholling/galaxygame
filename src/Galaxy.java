@@ -44,7 +44,7 @@ public class Galaxy extends Application {
 
                         if (up != null) {
                             locationLogic(up, spaceship);
-                        }
+                            }
                         break;
                     case DOWN:
                         Location down = spaceship.getLocation().getDown();
@@ -76,11 +76,13 @@ public class Galaxy extends Application {
         if (location.hasPlanet()) {
             visitPlanet((Spaceship) sprite, location);
         } else if (location.hasMeteorite()) {
-            System.out.println("DEAD"); //@todo: game over
+//            System.out.println("DEAD");
+            gp.getChildren().remove(sprite);
+            gp.setStyle("-fx-background-image: url('wp3.jpg');"); //@todo: proper game over
             return;
         }
         else if (location.hasWormhole()) {
-            visitWormhole();
+            visitWormhole(sprite);
         }
         move(sprite, location);
     }
@@ -100,8 +102,9 @@ public class Galaxy extends Application {
             addSprite( location, 1, "wormhole");
         }
     }
-    public void visitWormhole() {
-        System.out.println("Winner!"); //@todo : final winner screen (scores maybe?)
+    public void visitWormhole(Sprite sprite) {
+        gp.getChildren().remove(sprite);
+        gp.setStyle("-fx-background-image: url('wp2.jpg');"); //@todo : final winner screen (scores maybe?)
         }
 
 
