@@ -76,10 +76,12 @@ public class Galaxy extends Application {
         if (location.hasPlanet()) {
             visitPlanet((Spaceship) sprite, location);
         } else if (location.hasMeteorite()) {
-            System.out.println("DEAD"); //@todo: gameover
+            System.out.println("DEAD"); //@todo: game over
             return;
         }
-
+        else if (location.hasWormhole()) {
+            visitWormhole();
+        }
         move(sprite, location);
     }
 
@@ -89,19 +91,18 @@ public class Galaxy extends Application {
         gp.setRowIndex(sprite, newLocation.getRow());
     }
 
-    public void visitPlanet(Spaceship spaceship, Location location) {
-//        gp.getChildren().remove(location[column][row]);
-        ImageView image = new ImageView("planetvisited.png");
-        image.toBack();
-        gp.add(image, location.getColumn(), location.getRow());
-
-        spaceship.setPlanetsVisited(spaceship.getPlanetsVisited() +1);
-
-
-        if (spaceship.getPlanetsVisited() == planetQuantity) {
-//            addObject(location, 1, "wormhole");
+    public void visitPlanet(Spaceship spaceship, Location pLocation) {
+            ImageView image = new ImageView("planetvisited.png");
+//        image.toBack();
+            gp.add(image, pLocation.getColumn(), pLocation.getRow());
+            spaceship.setPlanetsVisited(spaceship.getPlanetsVisited() +1);
+            if (spaceship.getPlanetsVisited() == planetQuantity) {
+            addSprite( location, 1, "wormhole");
         }
     }
+    public void visitWormhole() {
+        System.out.println("Winner!"); //@todo : final winner screen (scores maybe?)
+        }
 
 
     public void addSprite(Location[][] location, int amount, String string) {
