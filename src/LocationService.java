@@ -25,7 +25,7 @@ public class LocationService {
                     location[i][j].setRight(location[i + 1][j]);
                 }
 
-                if (i - 1 < board_size && i - 1 > 0) {
+                if (i - 1 < board_size && i - 1 >= 0) {
                     location[i][j].setLeft(location[i - 1][j]);
                 }
 
@@ -33,7 +33,7 @@ public class LocationService {
                     location[i][j].setDown(location[i][j + 1]);
                 }
 
-                if (j - 1 < board_size && j - 1 > 0) {
+                if (j - 1 < board_size && j - 1 >= 0) {
                     location[i][j].setUp(location[i][j - 1]);
                 }
             }
