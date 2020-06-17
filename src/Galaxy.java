@@ -1,142 +1,123 @@
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class Galaxy extends Application {
-    GridPane gp;
-    int planetQuantity = 4;
-    Location[][] location;
+public class Galaxy {
+//    Location[][] location;
+//    int planetQuantity = 4;
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        gp = new GridPane();
+    LocationService locationService = new LocationService();
+    SpriteService spriteService = new SpriteService();
+    Location[][] playfield;
+
+    public void configure(Group root, GridPane gp){
+        spriteService.setGridPane(gp);
+        spriteService.setPlayfield(locationService.initalizePlayfield(gp));
+        playfield = locationService.initalizePlayfield(gp);
+
         gp.setPrefSize(600, 600);
-        LocationService locationService = new LocationService();
-        location = locationService.initalize(gp);
+        gp.setStyle("-fx-background-image: url('wp1.jpg');");
+        gp.setLayoutY(50);
+//        locationService.initalizePlayfield(gp);
+        spriteService.initializeSprites();
+
+        root.getChildren().add(gp);
+    }
+
+//    public void start(Stage stage) throws Exception {
+//        gp.setPrefSize(600, 600);
+//        location = locationService.initalizePlayfield(gp);
+        //timer
 
         // add spaceship
-        Spaceship spaceship = new Spaceship();
-        spaceship.setLocation(location[0][0]);
-        gp.add(spaceship, spaceship.getLocation().getColumn(), spaceship.getLocation().getRow());
 
 //        adds 4 planets at random locations
-        addSprite(location, planetQuantity, "planet");
+//        spriteService.addSprite(location, planetQuantity, "planet");
 
 //        //adds 5 meteorites at random locations
-        addSprite(location, 5, "meteorite");
+//        spriteService.addSprite(location, 5, "meteorite");
 
-        gp.setStyle("-fx-background-image: url('wp1.jpg');");
+//        gp.setStyle("-fx-background-image: url('wp1.jpg');");
+//        gp.setLayoutY(50);
+//        root.getChildren().add(gp);
+//        Scene scene = new Scene(root, 600, 650);//move spaceship around with arrows
+//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            public void handle(KeyEvent keyEvent) {
+//                switch (keyEvent.getCode()) {
+//                    case UP:
+//                        Location up = spaceship.getLocation().getUp();
+//
+//                        if (up != null) {
+//                            locationLogic(up, spaceship);
+//                        }
+//                        break;
+//                    case DOWN:
+//                        Location down = spaceship.getLocation().getDown();
+//
+//                        if (down != null) {
+//                            locationLogic(down, spaceship);
+//                        }
+//                        break;
+//                    case LEFT:
+//                        Location left = spaceship.getLocation().getLeft();
+//
+//                        if (left != null) {
+//                            locationLogic(left, spaceship);
+//                        }
+//                        break;
+//                    case RIGHT:
+//                        Location right = spaceship.getLocation().getRight();
+//
+//                        if (right != null) {
+//                            locationLogic(right, spaceship);
+//                        }
+//                        break;
+//                }
+//            }
+//        });
 
-        Scene scene = new Scene(gp, 600, 600);
-        stage.setScene(scene);
-        stage.show();
-        //move spaceship around with arrows
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode()) {
-                    case UP:
-                        Location up = spaceship.getLocation().getUp();
+//        stage.setScene(scene);
+//        stage.show();
+//    }
 
-                        if (up != null) {
-                            locationLogic(up, spaceship);
-                            }
-                        break;
-                    case DOWN:
-                        Location down = spaceship.getLocation().getDown();
-
-                        if (down != null) {
-                            locationLogic(down, spaceship);
-                        }
-                        break;
-                    case LEFT:
-                        Location left = spaceship.getLocation().getLeft();
-
-                        if (left != null) {
-                            locationLogic(left, spaceship);
-                        }
-                        break;
-                    case RIGHT:
-                        Location right = spaceship.getLocation().getRight();
-
-                        if (right != null) {
-                            locationLogic(right, spaceship);
-                        }
-                        break;
-                }
-            }
-        });
-    }
-
-    private void locationLogic(Location location, Sprite sprite) {
-        if (location.hasPlanet()) {
-            visitPlanet((Spaceship) sprite, location);
-        } else if (location.hasMeteorite()) {
-//            System.out.println("DEAD");
-            gp.getChildren().remove(sprite);
-            gp.setStyle("-fx-background-image: url('wp3.jpg');"); //@todo: proper game over
-            return;
-        }
-        else if (location.hasWormhole()) {
-            visitWormhole(sprite);
-        }
-        move(sprite, location);
-    }
-
-    public void move(Sprite sprite, Location newLocation) {
-        sprite.setLocation(newLocation);
-        gp.setColumnIndex(sprite, newLocation.getColumn());
-        gp.setRowIndex(sprite, newLocation.getRow());
-    }
-
-    public void visitPlanet(Spaceship spaceship, Location pLocation) {
-            ImageView image = new ImageView("planetvisited.png");
-//        image.toBack();
-            gp.add(image, pLocation.getColumn(), pLocation.getRow());
-            spaceship.setPlanetsVisited(spaceship.getPlanetsVisited() +1);
-            if (spaceship.getPlanetsVisited() == planetQuantity) {
-            addSprite( location, 1, "wormhole");
-        }
-    }
-    public void visitWormhole(Sprite sprite) {
-        gp.getChildren().remove(sprite);
-        gp.setStyle("-fx-background-image: url('wp2.jpg');"); //@todo : final winner screen (scores maybe?)
-        }
-
-
-    public void addSprite(Location[][] location, int amount, String string) {
-        int i = 0;
-        while (i < amount) {
-            int column = (int) Math.floor(Math.random() * 12);
-            int row = (int) Math.floor(Math.random() * 12);
-
-            if (!location[column][row].hasSprite()) {
-                Sprite anySprite;
-                switch (string) {
-                    case "meteorite":
-                        anySprite = new Meteorite();
-                        break;
-                    case "planet":
-                        anySprite = new Planet();
-                        break;
-                    case "wormhole":
-                        anySprite = new Wormhole();
-                        break;
-                    default:
-                        //@todo handle exception maybe??
-                        System.out.println("invalid input");
-                        return;
-                }
-
-                anySprite.setLocation(location[column][row]);
-                gp.add(anySprite, anySprite.getLocation().getColumn(), anySprite.getLocation().getRow());
-
-                i++;
-            }
-        }
-    }
+//    private void locationLogic(Location location, Sprite sprite) {
+//        if (location.hasPlanet()) {
+//            visitPlanet((Spaceship) sprite, location);
+//        } else if (location.hasMeteorite()) {
+//            gp.getChildren().remove(sprite);
+//            gp.setStyle("-fx-background-image: url('wp3.jpg');"); //@todo: proper game over
+//            return;
+//        } else if (location.hasWormhole()) {
+//            visitWormhole(sprite);
+//        }
+//        move(sprite, location);
+//    }
+//
+//    public void move(Sprite sprite, Location newLocation) {
+//        sprite.setLocation(newLocation);
+//        gp.setColumnIndex(sprite, newLocation.getColumn());
+//        gp.setRowIndex(sprite, newLocation.getRow());
+//    }
+//
+//
+//    public void visitPlanet(Spaceship spaceship, Location location) {
+//        Planet planet = (Planet) location.getSprite();
+//        planet.setVisited(true);
+//
+//        spaceship.setPlanetsVisited(spaceship.getPlanetsVisited() + 1);
+//
+//        if (spaceship.getPlanetsVisited() == planetQuantity) {
+//            spriteService.addSprite(this.location, 1, "wormhole");
+//        }
+//    }
+//
+//    public void visitWormhole(Sprite sprite) {
+//        gp.getChildren().remove(sprite);
+//        gp.setStyle("-fx-background-image: url('wp2.jpg');"); //@todo : final winner screen (scores maybe?)
+//        timer.stop();
+//    }
 }

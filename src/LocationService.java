@@ -5,7 +5,7 @@ import javafx.scene.shape.Rectangle;
 public class LocationService {
     int board_size = 12;
 
-    public Location[][] initalize(GridPane gp) {
+    public Location[][] initalizePlayfield(GridPane gp) {
         Location[][] location = new Location[board_size][board_size];
         //        initialize playfield
         for (int i = 0; i < board_size; i++) {

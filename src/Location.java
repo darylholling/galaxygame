@@ -77,6 +77,9 @@ public class Location extends Pane {
         return sprite instanceof Wormhole;
     }
 
+    public Sprite getSprite(){
+        return sprite;
+    }
 
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
