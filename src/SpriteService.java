@@ -1,10 +1,13 @@
 import javafx.scene.layout.GridPane;
 
+import java.util.ArrayList;
+
 public class SpriteService {
     GridPane gridPane;
     Location[][] playfield;
     int planetQuantity = 4;
     Spaceship spaceship = new Spaceship();
+    ArrayList<Meteorite> meteorites = new ArrayList<>();
 
 //    public SpriteService(GridPane gridPane, Location[][] playfield) {
 //        this.gridPane = gridPane;
@@ -41,6 +44,7 @@ public class SpriteService {
                 switch (string) {
                     case "meteorite":
                         anySprite = new Meteorite();
+                        meteorites.add((Meteorite)anySprite);
                         break;
                     case "planet":
                         anySprite = new Planet();

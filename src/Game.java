@@ -27,6 +27,7 @@ public class Game extends Application {
                         if (up != null) {
                             locationLogic(up, spaceship);
                         }
+                        moveMeteorites();
                         break;
                     case DOWN:
                         Location down = spaceship.getLocation().getDown();
@@ -34,6 +35,7 @@ public class Game extends Application {
                         if (down != null) {
                             locationLogic(down, spaceship);
                         }
+                        moveMeteorites();
                         break;
                     case LEFT:
                         Location left = spaceship.getLocation().getLeft();
@@ -41,6 +43,7 @@ public class Game extends Application {
                         if (left != null) {
                             locationLogic(left, spaceship);
                         }
+                        moveMeteorites();
                         break;
                     case RIGHT:
                         Location right = spaceship.getLocation().getRight();
@@ -48,12 +51,19 @@ public class Game extends Application {
                         if (right != null) {
                             locationLogic(right, spaceship);
                         }
+                        moveMeteorites();
                         break;
                 }
             }
         });
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void moveMeteorites(){
+        this.galaxy.spriteService.meteorites.forEach((meteorite) ->
+                move(meteorite, meteorite.getLocation().getRight())
+        );
     }
 
     private void locationLogic(Location location, Sprite sprite) {
