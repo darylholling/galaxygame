@@ -16,8 +16,8 @@ public class Galaxy {
 
     public void configure(Group root, GridPane gp){
         spriteService.setGridPane(gp);
-        spriteService.setPlayfield(locationService.initalizePlayfield(gp));
         playfield = locationService.initalizePlayfield(gp);
+        spriteService.setPlayfield(playfield);
 
         gp.setPrefSize(600, 600);
         gp.setStyle("-fx-background-image: url('wp1.jpg');");
