@@ -1,31 +1,44 @@
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 public class Galaxy extends Application {
     GridPane gp;
     int planetQuantity = 4;
     Location[][] location;
-
+    MediaPlayer mediaPlayer;
     Scene scene1, scene2, scene3;
 
     @Override
     public void start(Stage stage) throws Exception {
 
+        String musicFile = "src\\2001 A Space Odyssey.mp3";     // For example
+
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+
         stage.setTitle("Galaxy The Game!");
+        Label welcome = new Label("Galaxy the Game");
+        welcome.setFont(Font.font("Verdana", 60));
+        welcome.setTextFill(Color.WHITE);
+
 
         Button startGame = new Button("Start the game!");
         Button highScores = new Button("View highscores");
@@ -34,8 +47,8 @@ public class Galaxy extends Application {
 //        highScores.setOnAction(e);
         exitGame.setOnAction(e->stage.close());
 
-        VBox layout1 = new VBox(20);
-        layout1.getChildren().addAll(startGame,highScores,exitGame);
+        VBox layout1 = new VBox( 20);
+        layout1.getChildren().addAll(welcome,startGame,highScores,exitGame);
 
         layout1.setStyle("-fx-background-image: url('Space2.png');");
         layout1.setAlignment(Pos.CENTER);
@@ -61,9 +74,9 @@ public class Galaxy extends Application {
 
         Button button3 = new Button("Easy");
         button3.setOnAction(e->stage.setScene(scene3));
-        Button button4 = new Button("Hard");
+        Button button4 = new Button("Medium");
 //        button4.setOnAction(e->stage.setScene(scene2));
-        Button button5 = new Button("Very Hard");
+        Button button5 = new Button("Hard");
 //    button1.setOnAction(e->stage.setScene(scene2));
         Button button6 = new Button("Go back");
         button6.setOnAction(e->stage.setScene(scene1));
@@ -75,11 +88,14 @@ public class Galaxy extends Application {
 
         VBox layout2 = new VBox(20);
         layout2.setAlignment(Pos.CENTER);
+        Label chooseDifficulty = new Label("Choose your level:");
+       chooseDifficulty.setFont(Font.font("Verdana", 30));
+        chooseDifficulty.setTextFill(Color.WHITE);
 
 
 
 
-        layout2.getChildren().addAll(button3, button4, button5, button6);
+        layout2.getChildren().addAll(chooseDifficulty,button3, button4, button5, button6);
 
         scene2 = new Scene(layout2, 600, 600);
         layout2.setStyle("-fx-background-image: url('galaxy-menu.png');");
@@ -159,6 +175,7 @@ public class Galaxy extends Application {
     public void visitWormhole(Sprite sprite) {
         gp.getChildren().remove(sprite);
         gp.setStyle("-fx-background-image: url('wp2.jpg');"); //@todo : final winner screen (scores maybe?)
+        return;
         }
 
 
