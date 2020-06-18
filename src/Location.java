@@ -73,8 +73,20 @@ public class Location extends Pane {
     public boolean hasMeteorite() {
         return sprite instanceof Meteorite;
     }
+    public boolean hasWormhole() {
+        return sprite instanceof Wormhole;
+    }
+
+    public Sprite getSprite(){
+        return sprite;
+    }
 
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
+    }
+
+    @Override
+    public String toString() {
+        return this.hasSprite() + "";
     }
 }

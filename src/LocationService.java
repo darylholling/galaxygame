@@ -5,7 +5,7 @@ import javafx.scene.shape.Rectangle;
 public class LocationService {
     int board_size = 12;
 
-    public Location[][] initalize(GridPane gp) {
+    public Location[][] initalizePlayfield(GridPane gp) {
         Location[][] location = new Location[board_size][board_size];
         //        initialize playfield
         for (int i = 0; i < board_size; i++) {
@@ -25,7 +25,7 @@ public class LocationService {
                     location[i][j].setRight(location[i + 1][j]);
                 }
 
-                if (i - 1 < board_size && i - 1 > 0) {
+                if (i - 1 < board_size && i - 1 >= 0) {
                     location[i][j].setLeft(location[i - 1][j]);
                 }
 
@@ -33,7 +33,7 @@ public class LocationService {
                     location[i][j].setDown(location[i][j + 1]);
                 }
 
-                if (j - 1 < board_size && j - 1 > 0) {
+                if (j - 1 < board_size && j - 1 >= 0) {
                     location[i][j].setUp(location[i][j - 1]);
                 }
             }
