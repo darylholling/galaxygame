@@ -76,6 +76,9 @@ public class Location extends Pane {
     public boolean hasWormhole() {
         return sprite instanceof Wormhole;
     }
+    public boolean hasSpaceship() {
+        return sprite instanceof Spaceship;
+    }
 
     public Sprite getSprite(){
         return sprite;

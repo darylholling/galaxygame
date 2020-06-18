@@ -126,9 +126,13 @@ public class Game extends Application {
     private void locationLogic(Location location, Sprite sprite) {
         if (location.hasPlanet()) {
             visitPlanet((Spaceship) sprite, location);
-        } else if (location.hasMeteorite()) {
+        }
+        else if (location.hasSpaceship()){
+            System.out.println("spaceship was here");
+        }else if (location.hasMeteorite()) {
             gp.getChildren().remove(sprite);
             gp.setStyle("-fx-background-image: url('wp3.jpg');"); //@todo: proper game over
+            timer.stop();
             return;
         } else if (location.hasWormhole()) {
             System.out.println("wormhole");
