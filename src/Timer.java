@@ -2,8 +2,6 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class Timer extends AnimationTimer {
@@ -39,8 +37,9 @@ public class Timer extends AnimationTimer {
             time += deltaT;
             timestamp += 1000 * deltaT;
 
-            System.out.println(Long.toString(time));
+//            System.out.println(Long.toString(time));
             timerLabel.setText(Long.toString(time));
+
             // Create and configure VBox
             // gap between components is 20
             VBox vb = new VBox(20);

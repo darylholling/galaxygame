@@ -84,4 +84,6 @@ public class Location extends Pane {
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
+
+
 }

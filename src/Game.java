@@ -6,6 +6,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.util.Random;
+
 public class Game extends Application {
     GridPane gp = new GridPane();
     Galaxy galaxy = new Galaxy();
@@ -62,8 +64,42 @@ public class Game extends Application {
 
     private void moveMeteorites(){
         this.galaxy.spriteService.meteorites.forEach((meteorite) ->
-                move(meteorite, meteorite.getLocation().getRight())
+                move(meteorite, getRandom(meteorite))
         );
+    }
+
+    public Location getRandom(Meteorite meteorite){
+        Random random = new Random();
+//        int number = random.nextInt(4);
+
+        int number = 0;
+        if (number == 0) {
+            System.out.println(meteorite.getLocation().getUp());
+            System.out.println(meteorite.getLocation().getUp().hasSprite());
+            if (meteorite.getLocation().getUp() != null && !meteorite.getLocation().getUp().hasSprite()) {
+                return meteorite.getLocation().getUp();
+            }
+        }
+
+        if (number == 1) {
+            if (meteorite.getLocation().getRight() != null && !meteorite.getLocation().getRight().hasSprite()) {
+                return meteorite.getLocation().getUp();
+            }
+        }
+
+        if (number == 2) {
+            if (meteorite.getLocation().getDown() != null && !meteorite.getLocation().getDown().hasSprite()) {
+                return meteorite.getLocation().getUp();
+            }
+        }
+
+        if (number == 3) {
+            if (meteorite.getLocation().getLeft() != null && !meteorite.getLocation().getLeft().hasSprite()) {
+                return meteorite.getLocation().getUp();
+            }
+        }
+
+        return this.getRandom(meteorite);
     }
 
     private void locationLogic(Location location, Sprite sprite) {
@@ -79,7 +115,6 @@ public class Game extends Application {
             System.out.println("wormhole");
             visitWormhole(sprite);
         }
-        System.out.println("nottinhg");
 
         move(sprite, location);
     }
