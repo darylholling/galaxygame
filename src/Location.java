@@ -85,5 +85,8 @@ public class Location extends Pane {
         this.sprite = sprite;
     }
 
-
+    @Override
+    public String toString() {
+        return this.hasSprite() + "";
+    }
 }

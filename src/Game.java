@@ -6,6 +6,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Game extends Application {
@@ -14,12 +15,17 @@ public class Game extends Application {
     Group root = new Group();
     Timer timer = new Timer(root);
     Spaceship spaceship = galaxy.spriteService.spaceship;
+    Menu menu = new Menu();
 
     public void start(Stage stage) throws Exception {
+        Scene scene = new Scene(root, 600, 650);//move spaceship around with arrows
+//        menu.initalize(stage, gp, scene);
+
         galaxy.configure(root, gp);
         timer.start();
+//        System.out.println(Arrays.asList(galaxy.spriteService.playfield));
+        System.out.println(Arrays.deepToString(galaxy.spriteService.playfield));
 
-        Scene scene = new Scene(root, 600, 650);//move spaceship around with arrows
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
@@ -70,12 +76,9 @@ public class Game extends Application {
 
     public Location getRandom(Meteorite meteorite){
         Random random = new Random();
-//        int number = random.nextInt(4);
+        int number = random.nextInt(4);
 
-        int number = 0;
         if (number == 0) {
-            System.out.println(meteorite.getLocation().getUp());
-            System.out.println(meteorite.getLocation().getUp().hasSprite());
             if (meteorite.getLocation().getUp() != null && !meteorite.getLocation().getUp().hasSprite()) {
                 return meteorite.getLocation().getUp();
             }
@@ -83,28 +86,39 @@ public class Game extends Application {
 
         if (number == 1) {
             if (meteorite.getLocation().getRight() != null && !meteorite.getLocation().getRight().hasSprite()) {
-                return meteorite.getLocation().getUp();
+                return meteorite.getLocation().getRight();
             }
         }
 
         if (number == 2) {
             if (meteorite.getLocation().getDown() != null && !meteorite.getLocation().getDown().hasSprite()) {
-                return meteorite.getLocation().getUp();
+                return meteorite.getLocation().getDown();
             }
         }
 
         if (number == 3) {
             if (meteorite.getLocation().getLeft() != null && !meteorite.getLocation().getLeft().hasSprite()) {
-                return meteorite.getLocation().getUp();
+                return meteorite.getLocation().getLeft();
             }
         }
 
-        return this.getRandom(meteorite);
+        return null;
+//        return this.getRandom(meteorite);
+    }
+
+    private void locationMeteoriteLogic(Location location, Sprite sprite) {
+        if (location.hasPlanet()) {
+            return;
+        } else if (location.hasMeteorite()) {
+            return;
+        } else if (location.hasWormhole()) {
+            return;
+        }
+
+        move(sprite, location);
     }
 
     private void locationLogic(Location location, Sprite sprite) {
-        System.out.println("ll");
-
         if (location.hasPlanet()) {
             visitPlanet((Spaceship) sprite, location);
         } else if (location.hasMeteorite()) {
@@ -120,6 +134,8 @@ public class Game extends Application {
     }
 
     public void move(Sprite sprite, Location newLocation) {
+//        System.out.println(newLocation.getColumn());
+//        System.out.println(newLocation.getRow());
         sprite.setLocation(newLocation);
         gp.setColumnIndex(sprite, newLocation.getColumn());
         gp.setRowIndex(sprite, newLocation.getRow());
