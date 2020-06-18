@@ -1,5 +1,7 @@
 import javafx.scene.layout.Pane;
 
+import java.util.Random;
+
 public class Location extends Pane {
     private Location up;
     private Location right;
@@ -68,7 +70,45 @@ public class Location extends Pane {
         return sprite != null;
     }
 
+    public boolean hasPlanet() {
+        return sprite instanceof Planet;
+    }
+
+    public boolean hasMeteorite() {
+        return sprite instanceof Meteorite;
+    }
+
+    public boolean hasWormhole() {
+        return sprite instanceof Wormhole;
+    }
+
+    public Location getRandomDirection(Meteorite meteorite) {
+        int randomDirection = 0;
+        Random random = new Random();
+        randomDirection = random.nextInt(4);
+
+
+            if (randomDirection == 1 && !getUp().hasSprite() && up != null) {
+                return getUp();
+            } else if (randomDirection == 2 && !getDown().hasSprite() && down != null){
+                return getDown();
+            } else if (randomDirection == 3 && !getLeft().hasSprite() && left !=null) {
+                return getLeft();
+            } else if (randomDirection == 4 && !getRight().hasSprite() && right != null) {
+                return getRight();
+            } else {
+                return null;
+            }
+            
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
+
 }
