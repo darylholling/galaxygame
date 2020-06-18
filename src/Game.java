@@ -19,12 +19,12 @@ public class Game extends Application {
 
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(root, 600, 650);//move spaceship around with arrows
-//        menu.initalize(stage, gp, scene);
+        menu.initalize(stage, gp, scene);
 
         galaxy.configure(root, gp);
         timer.start();
 //        System.out.println(Arrays.asList(galaxy.spriteService.playfield));
-        System.out.println(Arrays.deepToString(galaxy.spriteService.playfield));
+//        System.out.println(Arrays.deepToString(galaxy.spriteService.playfield));
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
@@ -35,7 +35,7 @@ public class Game extends Application {
                         if (up != null) {
                             locationLogic(up, spaceship);
                         }
-                        moveMeteorites();
+                        locationMeteoriteLogic();
                         break;
                     case DOWN:
                         Location down = spaceship.getLocation().getDown();
@@ -43,7 +43,7 @@ public class Game extends Application {
                         if (down != null) {
                             locationLogic(down, spaceship);
                         }
-                        moveMeteorites();
+                        locationMeteoriteLogic();
                         break;
                     case LEFT:
                         Location left = spaceship.getLocation().getLeft();
@@ -51,7 +51,7 @@ public class Game extends Application {
                         if (left != null) {
                             locationLogic(left, spaceship);
                         }
-                        moveMeteorites();
+                        locationMeteoriteLogic();
                         break;
                     case RIGHT:
                         Location right = spaceship.getLocation().getRight();
@@ -59,7 +59,7 @@ public class Game extends Application {
                         if (right != null) {
                             locationLogic(right, spaceship);
                         }
-                        moveMeteorites();
+                        locationMeteoriteLogic();
                         break;
                 }
             }
@@ -68,55 +68,60 @@ public class Game extends Application {
         stage.show();
     }
 
-    private void moveMeteorites(){
-        this.galaxy.spriteService.meteorites.forEach((meteorite) ->
-                move(meteorite, getRandom(meteorite))
-        );
-    }
+//    private void moveMeteorites(){
+//        this.galaxy.spriteService.meteorites.forEach((meteorite) ->
+//                for (Meteorite  meteorite : this.galaxy.spriteService.meteorites) {
+//                    Location randomLocation = getRandom(meteorite);
+//                    if (randomLocation != null) {
+//                        move(meteorite, randomLocation);
+//                    }
+//                }
+//        );
+//    }
 
     public Location getRandom(Meteorite meteorite){
         Random random = new Random();
         int number = random.nextInt(4);
-
-        if (number == 0) {
-            if (meteorite.getLocation().getUp() != null && !meteorite.getLocation().getUp().hasSprite()) {
-                return meteorite.getLocation().getUp();
+        System.out.println(number);
+                Location loc = null;
+        if (number==0) {
+            if (meteorite.getLocation().getUp() != null && meteorite.getLocation().getUp().getRow() >= 0 && !meteorite.getLocation().getUp().hasPlanet() && !meteorite.getLocation().getUp().hasWormhole()) {
+                loc = meteorite.getLocation().getUp();
             }
         }
-
         if (number == 1) {
-            if (meteorite.getLocation().getRight() != null && !meteorite.getLocation().getRight().hasSprite()) {
-                return meteorite.getLocation().getRight();
+            if (meteorite.getLocation().getRight() != null && meteorite.getLocation().getRight().getColumn() < 12 && !meteorite.getLocation().getRight().hasPlanet() && !meteorite.getLocation().getRight().hasWormhole()) {
+                loc = meteorite.getLocation().getRight();
             }
         }
-
-        if (number == 2) {
-            if (meteorite.getLocation().getDown() != null && !meteorite.getLocation().getDown().hasSprite()) {
-                return meteorite.getLocation().getDown();
+            if (number == 2) {
+                if (meteorite.getLocation().getDown() != null && meteorite.getLocation().getDown().getRow() < 12 && !meteorite.getLocation().getDown().hasPlanet() && !meteorite.getLocation().getDown().hasWormhole()) {
+                    loc = meteorite.getLocation().getDown();
+                }
             }
-        }
-
-        if (number == 3) {
-            if (meteorite.getLocation().getLeft() != null && !meteorite.getLocation().getLeft().hasSprite()) {
-                return meteorite.getLocation().getLeft();
+            if (number == 3) {
+                if (meteorite.getLocation().getLeft() != null && meteorite.getLocation().getLeft().getColumn() >= 0 && !meteorite.getLocation().getLeft().hasPlanet() && !meteorite.getLocation().getLeft().hasWormhole()) {
+                    loc = meteorite.getLocation().getLeft();
+                }
             }
-        }
 
-        return null;
-//        return this.getRandom(meteorite);
+        return loc;
     }
 
-    private void locationMeteoriteLogic(Location location, Sprite sprite) {
-        if (location.hasPlanet()) {
-            return;
-        } else if (location.hasMeteorite()) {
-            return;
-        } else if (location.hasWormhole()) {
-            return;
+    private void locationMeteoriteLogic() {
+        for (Meteorite meteorite : this.galaxy.spriteService.meteorites) {
+            Location randomLocation = getRandom(meteorite);
+//            System.out.println(randomLocation.hasMeteorite());
+//            System.out.println(randomLocation.hasPlanet());
+//            System.out.println(randomLocation);
+            while (randomLocation == null) {
+                randomLocation = getRandom(meteorite);
+//                System.out.println(randomLocation);
+            }
+                move(meteorite, randomLocation);
         }
-
-        move(sprite, location);
     }
+
 
     private void locationLogic(Location location, Sprite sprite) {
         if (location.hasPlanet()) {
@@ -129,7 +134,6 @@ public class Game extends Application {
             System.out.println("wormhole");
             visitWormhole(sprite);
         }
-
         move(sprite, location);
     }
 

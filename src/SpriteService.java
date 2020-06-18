@@ -25,7 +25,7 @@ public class SpriteService {
     public void initializeSprites(){
         this.initializeSpaceShip();
         this.addSprite(playfield, planetQuantity, "planet");
-        this.addSprite(playfield, 1, "meteorite");
+        this.addSprite(playfield, 5, "meteorite");
     }
 
     public void initializeSpaceShip(){
