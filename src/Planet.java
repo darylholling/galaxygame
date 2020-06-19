@@ -14,7 +14,6 @@ public class Planet extends Sprite {
 
     public void setVisited(Boolean visited) {
         isVisited = visited;
-
         super.setImage(new ImageView(new Image("planetvisited.png")));
     }
 }

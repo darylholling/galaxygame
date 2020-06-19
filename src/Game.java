@@ -6,6 +6,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -36,6 +37,9 @@ public class Game extends Application {
                             locationLogic(up, spaceship);
                         }
                         locationMeteoriteLogic();
+                        if (up != null) {
+                            check(spaceship, up);
+                        }
                         break;
                     case DOWN:
                         Location down = spaceship.getLocation().getDown();
@@ -44,6 +48,9 @@ public class Game extends Application {
                             locationLogic(down, spaceship);
                         }
                         locationMeteoriteLogic();
+                        if (down != null) {
+                            check(spaceship, down);
+                        }
                         break;
                     case LEFT:
                         Location left = spaceship.getLocation().getLeft();
@@ -52,6 +59,9 @@ public class Game extends Application {
                             locationLogic(left, spaceship);
                         }
                         locationMeteoriteLogic();
+                        if (left != null) {
+                            check(spaceship, left);
+                        }
                         break;
                     case RIGHT:
                         Location right = spaceship.getLocation().getRight();
@@ -60,6 +70,9 @@ public class Game extends Application {
                             locationLogic(right, spaceship);
                         }
                         locationMeteoriteLogic();
+                        if (right != null) {
+                            check(spaceship, right);
+                        }
                         break;
                 }
             }
@@ -82,7 +95,6 @@ public class Game extends Application {
     public Location getRandom(Meteorite meteorite){
         Random random = new Random();
         int number = random.nextInt(4);
-        System.out.println(number);
                 Location loc = null;
         if (number==0) {
             if (meteorite.getLocation().getUp() != null && meteorite.getLocation().getUp().getRow() >= 0 && !meteorite.getLocation().getUp().hasPlanet() && !meteorite.getLocation().getUp().hasWormhole()) {
@@ -127,9 +139,7 @@ public class Game extends Application {
         if (location.hasPlanet()) {
             visitPlanet((Spaceship) sprite, location);
         }
-        else if (location.hasSpaceship()){
-            System.out.println("spaceship was here");
-        }else if (location.hasMeteorite()) {
+        else if (location.hasMeteorite()) {
             gp.getChildren().remove(sprite);
             gp.setStyle("-fx-background-image: url('wp3.jpg');"); //@todo: proper game over
             timer.stop();
@@ -144,16 +154,24 @@ public class Game extends Application {
     public void move(Sprite sprite, Location newLocation) {
 //        System.out.println(newLocation.getColumn());
 //        System.out.println(newLocation.getRow());
+        sprite.getLocation().setSprite(null);
         sprite.setLocation(newLocation);
         gp.setColumnIndex(sprite, newLocation.getColumn());
         gp.setRowIndex(sprite, newLocation.getRow());
+    }
+//to check if spaceship and meteorite move to the same location after keypress
+    public void check(Sprite sprite, Location location){
+        if(location.hasMeteorite() ){
+            gp.getChildren().remove(sprite);
+            gp.setStyle("-fx-background-image: url('wp3.jpg');"); //@todo: proper game over
+            timer.stop();
+        }
     }
 
 
     public void visitPlanet(Spaceship spaceship, Location location) {
         Planet planet = (Planet) location.getSprite();
         planet.setVisited(true);
-
         spaceship.setPlanetsVisited(spaceship.getPlanetsVisited() + 1);
 
         if (spaceship.getPlanetsVisited() == 4) {
