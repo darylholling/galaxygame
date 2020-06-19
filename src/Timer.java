@@ -49,6 +49,8 @@ public class Timer extends AnimationTimer {
 //            vb.setPrefWidth(scene.getWidth());
             // Move the VBox down a bit
             vb.setLayoutY(30);
+
+
             // Add the button and timerLabel to the VBox
             vb.getChildren().add(timerLabel);
             // Add the VBox to the root component

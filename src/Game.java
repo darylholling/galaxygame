@@ -77,7 +77,7 @@ public class Game extends Application {
                 }
             }
         });
-        stage.setScene(scene);
+        stage.setScene(menu.scene1);
         stage.show();
     }
 
