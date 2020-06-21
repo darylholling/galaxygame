@@ -122,7 +122,6 @@ public class MoveService {
             visitPlanet((Spaceship) sprite, location);
         } else if (location.hasMeteorite()) {
             this.updateScene(false);
-            return;
         } else if (location.hasWormhole()) {
             visitWormhole();
         }
