@@ -121,9 +121,7 @@ public class MoveService {
         if (location.hasPlanet()) {
             visitPlanet((Spaceship) sprite, location);
         } else if (location.hasMeteorite()) {
-            gridPane.getChildren().remove(sprite);
-            gridPane.setStyle("-fx-background-image: url('wp3.jpg');"); //@todo: proper game over
-            timer.stop();
+            this.updateScene(false);
             return;
         } else if (location.hasWormhole()) {
             visitWormhole();
