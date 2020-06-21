@@ -21,12 +21,12 @@ public class Menu {
     Timer timer = new Timer(root);
 
 
-    public void initalize(Stage stage, GridPane gridPane, Scene gameScene) throws Exception {
+    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer) throws Exception {
 
         String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
-//      mediaPlayer.play();
+      mediaPlayer.play();
 
         stage.setTitle("Galaxy Quest!");
         Label welcome = new Label("Galaxy Quest!");
@@ -52,14 +52,14 @@ public class Menu {
         VBox layout2 = new VBox(20);
 
         Button easy = new Button("Easy");
-        easy.setOnAction(e -> stage.setScene(gameScene));
-        timer.start();
+        easy.setOnAction(e -> {
+            stage.setScene(gameScene);
+            timer.start();
+        });
         Button medium = new Button("Medium");
 //      medium.setOnAction(e->stage.setScene(scene2));
-        timer.start();
         Button hard = new Button("Hard");
 //      hard.setOnAction(e->stage.setScene(scene2));
-        timer.start();
         Button goBack = new Button("Go back");
         goBack.setOnAction(e -> stage.setScene(scene1));
 
@@ -73,7 +73,7 @@ public class Menu {
         layout2.setStyle("-fx-background-image: url('galaxy-menu.png');");
         scene2 = new Scene(layout2, 600, 600);
 
-        //        stage.setScene(scene1);
-//        stage.show();
+                stage.setScene(scene1);
+        stage.show();
     }
 }
