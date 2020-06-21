@@ -1,5 +1,7 @@
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+
 public class Location extends Pane {
     private Location up;
     private Location right;
@@ -9,7 +11,7 @@ public class Location extends Pane {
     private int column;
     private int row;
 
-    private Sprite sprite;
+    private ArrayList<Sprite> sprites = new ArrayList<>();
 
     public Location(int column, int row) {
         this.column = column;
@@ -65,31 +67,94 @@ public class Location extends Pane {
     }
 
     public boolean hasSprite() {
-        return sprite != null;
+        return !sprites.isEmpty();
     }
+
     public boolean hasPlanet() {
-        return sprite instanceof Planet;
+        if (this.sprites.isEmpty()) {
+            return false;
+        }
+
+        if (sprites.size() > 1) {
+            for (Sprite sprite : sprites) {
+                if (sprite instanceof Planet) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return sprites.get(0) instanceof Planet;
     }
+
     public boolean hasMeteorite() {
-        return sprite instanceof Meteorite;
+        if (this.sprites.isEmpty()) {
+            return false;
+        }
+
+        if (sprites.size() > 1) {
+            for (Sprite sprite : sprites) {
+                if (sprite instanceof Meteorite) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return sprites.get(0) instanceof Meteorite;
     }
+
     public boolean hasWormhole() {
-        return sprite instanceof Wormhole;
+        if (this.sprites.isEmpty()) {
+            return false;
+        }
+
+        if (sprites.size() > 1) {
+            for (Sprite sprite : sprites) {
+                if (sprite instanceof Wormhole) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return sprites.get(0) instanceof Wormhole;
     }
+
     public boolean hasSpaceship() {
-        return sprite instanceof Spaceship;
+        if (this.sprites.isEmpty()) {
+            return false;
+        }
+
+        if (sprites.size() > 1) {
+            for (Sprite sprite : sprites) {
+                if (sprite instanceof Spaceship) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return sprites.get(0) instanceof Spaceship;
     }
 
-    public Sprite getSprite(){
-        return sprite;
+    public Sprite getSprite() {
+        return sprites.get(0);
     }
 
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
+    public ArrayList<Sprite> getSprites() {
+        return sprites;
     }
 
-//    @Override
-//    public String toString() {
-//        return this.hasSprite() + "";
-//    }
+    public void addSprite(Sprite sprite) {
+        sprites.add(sprite);
+    }
+
+    public void removeSprite(Sprite sprite) {
+        sprites.remove(sprite);
+    }
 }
