@@ -22,7 +22,6 @@ public class Game extends Application {
         moveService.configure(stage, scene, spriteService, gridPane, timer);
         timer.start();
 
-
         stage.setScene(scene);
         stage.show();
     }
