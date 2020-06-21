@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -23,7 +24,7 @@ public class Game extends Application {
         menu.initalize(stage, gp, scene);
 
         galaxy.configure(root, gp);
-        timer.start();
+//        timer.start();
 //        System.out.println(Arrays.asList(galaxy.spriteService.playfield));
 //        System.out.println(Arrays.deepToString(galaxy.spriteService.playfield));
 
@@ -136,6 +137,7 @@ public class Game extends Application {
 
 
     private void locationLogic(Location location, Sprite sprite) {
+        
         if (location.hasPlanet()) {
             visitPlanet((Spaceship) sprite, location);
         }

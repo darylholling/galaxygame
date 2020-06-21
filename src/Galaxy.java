@@ -1,4 +1,5 @@
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class Galaxy {
@@ -15,6 +16,7 @@ public class Galaxy {
         spriteService.setPlayfield(playfield);
 
         gp.setPrefSize(600, 600);
+
         gp.setStyle("-fx-background-image: url('wp1.jpg');");
         gp.setLayoutY(50);
 //        locationService.initalizePlayfield(gp);

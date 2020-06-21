@@ -12,59 +12,68 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
+
+
 public class Menu {
     Scene scene1, scene2;
     MediaPlayer mediaPlayer;
+    Group root = new Group();
+    Timer timer = new Timer(root);
+
 
     public void initalize(Stage stage, GridPane gridPane, Scene gameScene) throws Exception {
-        String musicFile = "src\\Star Wars.mp3";
 
+        String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.play();
+//      mediaPlayer.play();
 
         stage.setTitle("Galaxy Quest!");
         Label welcome = new Label("Galaxy Quest!");
         welcome.setFont(Font.font("Verdana", 60));
         welcome.setTextFill(Color.WHITE);
 
+        VBox layout1 = new VBox(20);
+
         Button startGame = new Button("Start the game!");
-        Button highScores = new Button("View high scores");
-        Button exitGame = new Button("Quit game");
         startGame.setOnAction(e -> stage.setScene(scene2));
+
+        Button highScores = new Button("View high scores");
 //      highScores.setOnAction(e);
+        Button exitGame = new Button("Quit game");
         exitGame.setOnAction(e -> stage.close());
 
-        VBox layout1 = new VBox(20);
         layout1.getChildren().addAll(welcome, startGame, highScores, exitGame);
 
         layout1.setStyle("-fx-background-image: url('Space2.png');");
         layout1.setAlignment(Pos.CENTER);
         scene1 = new Scene(layout1, 600, 600);
 
-        gridPane.setStyle("-fx-background-image: url('wp1.jpg');");
+        VBox layout2 = new VBox(20);
 
         Button easy = new Button("Easy");
         easy.setOnAction(e -> stage.setScene(gameScene));
+        timer.start();
         Button medium = new Button("Medium");
-        //        medium.setOnAction(e->stage.setScene(scene2));
+//      medium.setOnAction(e->stage.setScene(scene2));
+        timer.start();
         Button hard = new Button("Hard");
 //      hard.setOnAction(e->stage.setScene(scene2));
+        timer.start();
         Button goBack = new Button("Go back");
         goBack.setOnAction(e -> stage.setScene(scene1));
-//
+
         easy.setMaxWidth(120);
         medium.setMaxWidth(120);
         hard.setMaxWidth(120);
         goBack.setMaxWidth(120);
 
-        VBox layout2 = new VBox(20);
         layout2.setAlignment(Pos.CENTER);
         layout2.getChildren().addAll(easy, medium, hard, goBack);
-
-        scene2 = new Scene(layout2, 600, 600);
         layout2.setStyle("-fx-background-image: url('galaxy-menu.png');");
-        stage.setScene(scene1);
-        stage.show();
+        scene2 = new Scene(layout2, 600, 600);
+
+        //        stage.setScene(scene1);
+//        stage.show();
     }
 }
