@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class Menu {
     Scene scene1, scene2;
 
-    public void initalize(Stage stage, GridPane gridPane, Scene gameScene) throws Exception {
+    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer) throws Exception {
         stage.setTitle("Galaxy The Game!");
 
         Button startGame = new Button("Start the game!");
@@ -28,9 +28,13 @@ public class Menu {
         gridPane.setStyle("-fx-background-image: url('wp1.jpg');");
 
         Button button3 = new Button("Easy");
-        button3.setOnAction(e -> stage.setScene(gameScene));
+        button3.setOnAction(e -> {
+                    stage.setScene(gameScene);
+                    timer.start();
+                }
+        );
         Button button4 = new Button("Hard");
-        //        button4.setOnAction(e->stage.setScene(scene2));
+        button4.setOnAction(e -> stage.setScene(scene2));
         Button button5 = new Button("Very Hard");
 //    button1.setOnAction(e->stage.setScene(scene2));
         Button button6 = new Button("Go back");

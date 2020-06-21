@@ -5,9 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.nio.file.attribute.UserPrincipal;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Game extends Application {
@@ -20,10 +17,9 @@ public class Game extends Application {
 
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(root, 600, 650);//move spaceship around with arrows
-        menu.initalize(stage, gp, scene);
+        menu.initalize(stage, gp, scene, timer);
 
         galaxy.configure(root, gp);
-        timer.start();
 //        System.out.println(Arrays.asList(galaxy.spriteService.playfield));
 //        System.out.println(Arrays.deepToString(galaxy.spriteService.playfield));
 
