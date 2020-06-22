@@ -20,8 +20,7 @@ public class Menu {
     Group root = new Group();
     Timer timer = new Timer(root);
 
-
-    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer) throws Exception {
+    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer, MoveService moveService) throws Exception {
 
         String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
@@ -51,15 +50,22 @@ public class Menu {
 
         VBox layout2 = new VBox(20);
 
-        Button easy = new Button("Easy");
+        Button easy = new Button("Tactical");
         easy.setOnAction(e -> {
-            stage.setScene(gameScene);
+            moveService.gameMode = 1;
+           stage.setScene(gameScene);
             timer.start();
         });
-        Button medium = new Button("Medium");
-//      medium.setOnAction(e->stage.setScene(scene2));
-        Button hard = new Button("Hard");
-//      hard.setOnAction(e->stage.setScene(scene2));
+        Button medium = new Button("Normal");
+        medium.setOnAction(e -> {
+//            stage.setScene(gameScene);
+//            timer.start();
+        });
+        Button hard = new Button("Expert");
+        hard.setOnAction(e -> {
+//            stage.setScene(gameScene);
+//            timer.start();
+        });
         Button goBack = new Button("Go back");
         goBack.setOnAction(e -> stage.setScene(scene1));
 

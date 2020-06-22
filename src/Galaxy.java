@@ -17,7 +17,7 @@ public class Galaxy {
         root.getChildren().add(gp);
     }
 
-    public Location[][] getPlayfield(){
+    public Location[][] getPlayfield() {
         return this.location;
     }
 
