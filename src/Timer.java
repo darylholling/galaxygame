@@ -40,26 +40,27 @@ public class Timer extends AnimationTimer {
     @Override
     public void handle(long now) {
         long newTime = System.currentTimeMillis();
-        if (timestamp + 1000 <= newTime) {
-            long deltaT = (newTime - timestamp) / 1000;
-            time += deltaT;
-            timestamp += 1000 * deltaT;
+        long deltaT = (newTime - timestamp) / 1000;
+        time += deltaT;
+        timestamp += 1000 * deltaT;
 
 //            System.out.println(Long.toString(time));
-            timerLabel.setText(Long.toString(time));
-            timerLabel.setTextFill(Color.RED);
-            timerLabel.setStyle("-fx-font: 45 verdana;");
+        timerLabel.setMinSize(600, 35);
+        timerLabel.setText("Seconds played: "+Long.toString(time));
+        timerLabel.setTextFill(Color.ALICEBLUE);
+        timerLabel.setStyle("-fx-font: 35 fantasy;" +
+                "-fx-background-image:url('wp1.jpg') ");
 
 
-            // gap between components is 20
-            HBox hb = new HBox(20);
-            // Relocate Hb Box
-            hb.relocate(30, 1);
-            // Add the label and timerLabel to the VBox
-            hb.getChildren().addAll(timerLabel);
-            // Add the HBox to the root component
-            root.getChildren().add(hb);
 
-        }
+
+        // gap between components is 20
+        HBox hb = new HBox(20);
+        // Add the label and timerLabel to the VBox
+        hb.getChildren().addAll(timerLabel);
+        // Add the HBox to the root component
+        root.getChildren().add(hb);
+
+
     }
 }
