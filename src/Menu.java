@@ -20,7 +20,7 @@ public class Menu {
     Group root = new Group();
     Timer timer = new Timer(root);
 
-    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer, MoveService moveService) throws Exception {
+    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer) throws Exception {
 
         String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
@@ -52,8 +52,7 @@ public class Menu {
 
         Button easy = new Button("Tactical");
         easy.setOnAction(e -> {
-            moveService.gameMode = 1;
-           stage.setScene(gameScene);
+            stage.setScene(gameScene);
             timer.start();
         });
         Button medium = new Button("Normal");
