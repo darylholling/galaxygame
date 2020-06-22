@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import javax.imageio.plugins.tiff.TIFFImageReadParam;
+//import javax.imageio.plugins.tiff.TIFFImageReadParam;
 
 public class Timer extends AnimationTimer {
     Group root;
