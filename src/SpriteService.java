@@ -1,45 +1,51 @@
 import javafx.scene.layout.GridPane;
-
 import java.util.ArrayList;
 
 public class SpriteService {
+    int planetQuantity = 4;
     GridPane gridPane;
     Location[][] playfield;
-    int planetQuantity = 4;
     Spaceship spaceship = new Spaceship();
     ArrayList<Meteorite> meteorites = new ArrayList<>();
+    Boolean wormholeInitialized = false;
 
-//    public SpriteService(GridPane gridPane, Location[][] playfield) {
-//        this.gridPane = gridPane;
-//        this.playfield = playfield;
-//    }
-
-    public void setGridPane(GridPane gridPane){
+    public void configure(GridPane gridPane, Location[][] playfield){
+        this.playfield = playfield;
         this.gridPane = gridPane;
+
+        this.initializeSprites();
     }
 
-    public void setPlayfield(Location[][] playfield){
-        this.playfield = playfield;
+    public Spaceship getSpaceship(){
+        return this.spaceship;
+    }
+
+    public ArrayList<Meteorite> getMeteorites () {
+        return this.meteorites;
+    }
+
+    public Boolean isWormholeInitialized(){
+        return this.wormholeInitialized;
     }
 
     public void initializeSprites(){
         this.initializeSpaceShip();
-        this.addSprite(playfield, planetQuantity, "planet");
-        this.addSprite(playfield, 5, "meteorite");
+        this.addSprite(planetQuantity, "planet");
+        this.addSprite(5, "meteorite");
     }
 
-    public void initializeSpaceShip(){
+    private void initializeSpaceShip(){
         spaceship.setLocation(playfield[0][0]);
         this.gridPane.add(spaceship, spaceship.getLocation().getColumn(), spaceship.getLocation().getRow());
     }
 
-    public void addSprite(Location[][] location, int amount, String string) {
+    public void addSprite(int amount, String string) {
         int i = 0;
         while (i < amount) {
             int column = (int) Math.floor(Math.random() * 12);
             int row = (int) Math.floor(Math.random() * 12);
 
-            if (!location[column][row].hasSprite()) {
+            if (!this.playfield[column][row].hasSprite()) {
                 Sprite anySprite;
                 switch (string) {
                     case "meteorite":
@@ -51,6 +57,7 @@ public class SpriteService {
                         break;
                     case "wormhole":
                         anySprite = new Wormhole();
+                        wormholeInitialized = true;
                         break;
                     default:
                         //@todo handle exception maybe??
@@ -58,7 +65,7 @@ public class SpriteService {
                         return;
                 }
 
-                anySprite.setLocation(location[column][row]);
+                anySprite.setLocation(this.playfield[column][row]);
                 this.gridPane.add(anySprite, anySprite.getLocation().getColumn(), anySprite.getLocation().getRow());
 
                 i++;

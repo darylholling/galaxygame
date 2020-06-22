@@ -26,7 +26,7 @@ public class Menu {
         String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
-      mediaPlayer.play();
+//      mediaPlayer.play();
 
         stage.setTitle("Galaxy Quest!");
         Label welcome = new Label("Galaxy Quest!");

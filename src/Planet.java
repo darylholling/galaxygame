@@ -2,7 +2,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Planet extends Sprite {
-    private Boolean isVisited;
+    private Boolean isVisited = false;
 
     public Planet(){
         super("Planet.png");

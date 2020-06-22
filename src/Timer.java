@@ -14,9 +14,9 @@ import javafx.scene.text.Font;
 
 public class Timer extends AnimationTimer {
     Group root;
-    private long timestamp;
-    private long time = 0;
-    private long fraction = 0;
+    long timestamp;
+    long time = 0;
+    long fraction = 0;
     Label timerLabel = new Label();
 
     public Timer(Group root) {
