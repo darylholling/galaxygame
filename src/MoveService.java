@@ -113,10 +113,9 @@ public class MoveService {
     private void moveMeteorites() {
         for (Meteorite meteorite : spriteService.getMeteorites()) {
             Location randomLocation = getRandom(meteorite);
-            while (randomLocation == null) {
+            while (randomLocation == null || randomLocation.hasMeteorite()) {
                 randomLocation = getRandom(meteorite);
             }
-
             move(meteorite, randomLocation);
         }
     }
@@ -146,6 +145,7 @@ public class MoveService {
             this.updateScene(false);
         }
     }
+// to check if meteorites move to the same location after keypress
 
     public void visitPlanet(Spaceship spaceship, Location location) {
         Planet planet = (Planet) location.getSprite();
