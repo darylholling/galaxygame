@@ -145,7 +145,6 @@ public class MoveService {
             this.updateScene(false);
         }
     }
-// to check if meteorites move to the same location after keypress
 
     public void visitPlanet(Spaceship spaceship, Location location) {
         Planet planet = (Planet) location.getSprite();
