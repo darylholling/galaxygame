@@ -30,6 +30,7 @@ public class MoveService {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
                     case UP:
+                    case W:
                         Location up = spaceship.getLocation().getUp();
 
                         if (up != null) {
@@ -41,6 +42,7 @@ public class MoveService {
                         }
                         break;
                     case DOWN:
+                    case S:
                         Location down = spaceship.getLocation().getDown();
 
                         if (down != null) {
@@ -52,6 +54,7 @@ public class MoveService {
                         }
                         break;
                     case LEFT:
+                    case A:
                         Location left = spaceship.getLocation().getLeft();
 
                         if (left != null) {
@@ -63,6 +66,7 @@ public class MoveService {
                         }
                         break;
                     case RIGHT:
+                    case D:
                         Location right = spaceship.getLocation().getRight();
 
                         if (right != null) {
