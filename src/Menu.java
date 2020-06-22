@@ -52,7 +52,7 @@ public class Menu {
 
         Button easy = new Button("Tactical");
         easy.setOnAction(e -> {
-            stage.setScene(gameScene);
+           stage.setScene(gameScene);
             timer.start();
         });
         Button medium = new Button("Normal");

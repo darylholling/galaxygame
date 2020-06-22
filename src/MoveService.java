@@ -21,7 +21,6 @@ public class MoveService extends Menu {
     SpriteService spriteService;
     Timer timer;
     Stage stage;
-    Integer gameMode;
 
     public void configure(Stage stage, Scene scene, SpriteService spriteService, GridPane gridPane, Timer timer) {
         this.spaceship = spriteService.getSpaceship();
@@ -30,16 +29,11 @@ public class MoveService extends Menu {
         this.timer = timer;
         this.stage = stage;
 
-
         this.initiateMoveListener(scene);
-
     }
 
 
     public void initiateMoveListener(Scene scene) {
-if (gameMode!= 1) {
-    timeBased(100);
-}
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
@@ -50,9 +44,7 @@ if (gameMode!= 1) {
                         if (up != null) {
                             locationLogic(up, spaceship);
                         }
-                        if (gameMode == 1) {
                             moveMeteorites();
-                        }
                         if (up != null) {
                             check(up);
                         }
@@ -64,9 +56,7 @@ if (gameMode!= 1) {
                         if (down != null) {
                             locationLogic(down, spaceship);
                         }
-                        if (gameMode == 1) {
                             moveMeteorites();
-                        }
                         if (down != null) {
                             check(down);
                         }
@@ -78,9 +68,7 @@ if (gameMode!= 1) {
                         if (left != null) {
                             locationLogic(left, spaceship);
                         }
-                        if (gameMode == 1) {
                             moveMeteorites();
-                        }
                         if (left != null) {
                             check(left);
                         }
@@ -92,9 +80,7 @@ if (gameMode!= 1) {
                         if (right != null) {
                             locationLogic(right, spaceship);
                         }
-                        if (gameMode == 1) {
                             moveMeteorites();
-                        }
                         if (right != null) {
                             check(right);
                         }
