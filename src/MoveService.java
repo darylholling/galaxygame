@@ -158,6 +158,7 @@ public class MoveService {
 
     public void visitWormhole() {
         this.updateScene(true);
+//        game.high
     }
 
     public void updateScene(Boolean winner) {

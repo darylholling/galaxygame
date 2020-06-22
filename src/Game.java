@@ -4,6 +4,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Game extends Application {
     GridPane gridPane = new GridPane();
     Galaxy galaxy = new Galaxy();
@@ -12,17 +14,19 @@ public class Game extends Application {
     Menu menu = new Menu();
     MoveService moveService = new MoveService();
     SpriteService spriteService = new SpriteService();
+    ArrayList<Long> highscores = new ArrayList<>();
 
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(root, 600, 650);
         menu.initalize(stage, gridPane, scene, timer);
 
         galaxy.configure(root, gridPane);
+//        timer.start();
+
         spriteService.configure(gridPane, galaxy.getPlayfield());
         moveService.configure(stage, scene, spriteService, gridPane, timer);
-        timer.start();
 
-        stage.setScene(scene);
-        stage.show();
+//        stage.setScene(scene);
+//        stage.show();
     }
 }

@@ -50,7 +50,6 @@ public class Timer extends AnimationTimer {
             timerLabel.setTextFill(Color.RED);
             timerLabel.setStyle("-fx-font: 45 verdana;");
 
-
             // gap between components is 20
             HBox hb = new HBox(20);
             // Relocate Hb Box
@@ -59,7 +58,6 @@ public class Timer extends AnimationTimer {
             hb.getChildren().addAll(timerLabel);
             // Add the HBox to the root component
             root.getChildren().add(hb);
-
         }
     }
 }
