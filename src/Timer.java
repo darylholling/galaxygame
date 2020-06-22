@@ -49,7 +49,7 @@ public class Timer extends AnimationTimer {
         timerLabel.setText("Seconds played: "+Long.toString(time));
         timerLabel.setTextFill(Color.ALICEBLUE);
         timerLabel.setStyle("-fx-font: 35 fantasy;" +
-                "-fx-background-image:url('wp1.jpg') ");
+                "-fx-background-image:url('wp1.gif') ");
 
 
 
