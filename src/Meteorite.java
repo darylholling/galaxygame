@@ -2,7 +2,7 @@ import javafx.scene.layout.GridPane;
 
 public class Meteorite extends Sprite implements MovableInterface {
     public Meteorite() {
-        super("meteorite.png");
+        super("meteorite.gif");
     }
 
     @Override

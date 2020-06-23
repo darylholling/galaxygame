@@ -4,7 +4,7 @@ public class Spaceship extends Sprite implements MovableInterface {
     private Integer planetsVisited = 0;
 
     public Spaceship() {
-        super("spaceship.png");
+        super("spaceship.gif");
     }
 
     public Integer getPlanetsVisited() {
