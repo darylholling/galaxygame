@@ -116,27 +116,20 @@ public class MoveService {
             while (randomLocation == null || randomLocation.hasMeteorite()) {
                 randomLocation = getRandom(meteorite);
             }
-            move(meteorite, randomLocation);
+            meteorite.move(meteorite, randomLocation, this);
         }
     }
 
-    private void locationLogic(Location location, Sprite sprite) {
+    private void locationLogic(Location location, Spaceship spaceship) {
         if (location.hasPlanet()) {
-            visitPlanet((Spaceship) sprite, location);
+            visitPlanet(spaceship, location);
         } else if (location.hasMeteorite()) {
             this.updateScene(false);
         } else if (location.hasWormhole()) {
             visitWormhole();
         }
 
-        move(sprite, location);
-    }
-
-    public void move(Sprite sprite, Location newLocation) {
-        sprite.getLocation().removeSprite(sprite);
-        sprite.setLocation(newLocation);
-        gridPane.setColumnIndex(sprite, newLocation.getColumn());
-        gridPane.setRowIndex(sprite, newLocation.getRow());
+        spaceship.move(spaceship, location, this);
     }
 
     //to check if spaceship and meteorite move to the same location after keypress
