@@ -3,12 +3,12 @@ import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 
 public class SpriteService {
-    int planetQuantity = 4;
-    GridPane gridPane;
-    Location[][] playfield;
-    Spaceship spaceship = new Spaceship();
-    ArrayList<Meteorite> meteorites = new ArrayList<>();
-    Boolean wormholeInitialized = false;
+    public int planetQuantity = 4;
+    private GridPane gridPane;
+    private Location[][] playfield;
+    public Spaceship spaceship = new Spaceship();
+    private ArrayList<Meteorite> meteorites = new ArrayList<>();
+    private Boolean wormholeInitialized = false;
 
     public void configure(GridPane gridPane, Location[][] playfield) {
         this.playfield = playfield;

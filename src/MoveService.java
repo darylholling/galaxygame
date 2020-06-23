@@ -25,7 +25,6 @@ public class MoveService {
     }
 
     public void initiateMoveListener(Scene scene) {
-
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
@@ -102,7 +101,7 @@ public class MoveService {
     private void moveMeteorites() {
         for (Meteorite meteorite : spriteService.getMeteorites()) {
             Location randomLocation = getRandom(meteorite);
-            while (randomLocation == null || randomLocation.hasMeteorite()) {
+            while (randomLocation == null || randomLocation.hasMeteorite() || randomLocation.hasPlanet()) {
                 randomLocation = getRandom(meteorite);
             }
 

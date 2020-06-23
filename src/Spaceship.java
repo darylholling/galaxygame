@@ -1,7 +1,7 @@
 import javafx.scene.layout.GridPane;
 
 public class Spaceship extends Sprite implements MovableInterface {
-    Integer planetsVisited = 0;
+    private Integer planetsVisited = 0;
 
     public Spaceship() {
         super("spaceship.png");

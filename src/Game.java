@@ -18,7 +18,7 @@ public class Game extends Application {
         menu.initalize(stage, gridPane, scene, timer);
 
         galaxy.configure(root, gridPane);
-        spriteService.configure(gridPane, galaxy.getPlayfield());
+        spriteService.configure(gridPane, galaxy.getLocation());
         moveService.configure(stage, scene, spriteService, gridPane, timer);
         timer.start();
 
