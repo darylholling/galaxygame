@@ -11,7 +11,7 @@ public class Galaxy {
         this.initalizePlayfield(gp);
 
         gp.setPrefSize(600, 600);
-        gp.setStyle("-fx-background-image: url('wp1.jpg');");
+        gp.setStyle("-fx-background-image: url('wp1.gif');");
         gp.setLayoutY(50);
 
         root.getChildren().add(gp);
@@ -57,5 +57,4 @@ public class Galaxy {
 
         this.location = location;
     }
-
 }

@@ -1,4 +1,5 @@
 import javafx.scene.layout.GridPane;
+
 import java.util.ArrayList;
 
 public class SpriteService {
@@ -9,32 +10,32 @@ public class SpriteService {
     ArrayList<Meteorite> meteorites = new ArrayList<>();
     Boolean wormholeInitialized = false;
 
-    public void configure(GridPane gridPane, Location[][] playfield){
+    public void configure(GridPane gridPane, Location[][] playfield) {
         this.playfield = playfield;
         this.gridPane = gridPane;
 
         this.initializeSprites();
     }
 
-    public Spaceship getSpaceship(){
+    public Spaceship getSpaceship() {
         return this.spaceship;
     }
 
-    public ArrayList<Meteorite> getMeteorites () {
+    public ArrayList<Meteorite> getMeteorites() {
         return this.meteorites;
     }
 
-    public Boolean isWormholeInitialized(){
+    public Boolean isWormholeInitialized() {
         return this.wormholeInitialized;
     }
 
-    public void initializeSprites(){
+    public void initializeSprites() {
         this.initializeSpaceShip();
         this.addSprite(planetQuantity, "planet");
         this.addSprite(5, "meteorite");
     }
 
-    private void initializeSpaceShip(){
+    private void initializeSpaceShip() {
         spaceship.setLocation(playfield[0][0]);
         this.gridPane.add(spaceship, spaceship.getLocation().getColumn(), spaceship.getLocation().getRow());
     }
@@ -50,7 +51,7 @@ public class SpriteService {
                 switch (string) {
                     case "meteorite":
                         anySprite = new Meteorite();
-                        meteorites.add((Meteorite)anySprite);
+                        meteorites.add((Meteorite) anySprite);
                         break;
                     case "planet":
                         anySprite = new Planet();
@@ -60,7 +61,6 @@ public class SpriteService {
                         wormholeInitialized = true;
                         break;
                     default:
-                        //@todo handle exception maybe??
                         System.out.println("invalid input");
                         return;
                 }

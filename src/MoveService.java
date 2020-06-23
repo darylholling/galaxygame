@@ -30,47 +30,40 @@ public class MoveService {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
                     case UP:
+                    case W:
                         Location up = spaceship.getLocation().getUp();
+                        moveMeteorites();
 
                         if (up != null) {
-                            locationLogic(up, spaceship);
-                        }
-                        moveMeteorites();
-                        if (up != null) {
-                            check(up);
+                            moveSpaceShip(up, spaceship);
                         }
                         break;
                     case DOWN:
+                    case S:
                         Location down = spaceship.getLocation().getDown();
+                        moveMeteorites();
 
                         if (down != null) {
-                            locationLogic(down, spaceship);
-                        }
-                        moveMeteorites();
-                        if (down != null) {
-                            check(down);
+                            moveSpaceShip(down, spaceship);
                         }
                         break;
                     case LEFT:
+                    case A:
                         Location left = spaceship.getLocation().getLeft();
+                        moveMeteorites();
 
                         if (left != null) {
-                            locationLogic(left, spaceship);
-                        }
-                        moveMeteorites();
-                        if (left != null) {
-                            check(left);
+                            moveSpaceShip(left, spaceship);
                         }
                         break;
                     case RIGHT:
+                    case D:
                         Location right = spaceship.getLocation().getRight();
 
-                        if (right != null) {
-                            locationLogic(right, spaceship);
-                        }
                         moveMeteorites();
+
                         if (right != null) {
-                            check(right);
+                            moveSpaceShip(right, spaceship);
                         }
                         break;
                 }
@@ -109,38 +102,28 @@ public class MoveService {
     private void moveMeteorites() {
         for (Meteorite meteorite : spriteService.getMeteorites()) {
             Location randomLocation = getRandom(meteorite);
-            while (randomLocation == null) {
+            while (randomLocation == null || randomLocation.hasMeteorite()) {
                 randomLocation = getRandom(meteorite);
             }
 
-            move(meteorite, randomLocation);
+            if (randomLocation.hasSpaceship()) {
+                this.updateScene(false);
+            }
+
+            meteorite.move(meteorite, randomLocation, this.gridPane);
         }
     }
 
-    private void locationLogic(Location location, Sprite sprite) {
+    private void moveSpaceShip(Location location, Spaceship spaceship) {
         if (location.hasPlanet()) {
-            visitPlanet((Spaceship) sprite, location);
+            visitPlanet(spaceship, location);
         } else if (location.hasMeteorite()) {
             this.updateScene(false);
         } else if (location.hasWormhole()) {
             visitWormhole();
         }
 
-        move(sprite, location);
-    }
-
-    public void move(Sprite sprite, Location newLocation) {
-        sprite.getLocation().removeSprite(sprite);
-        sprite.setLocation(newLocation);
-        gridPane.setColumnIndex(sprite, newLocation.getColumn());
-        gridPane.setRowIndex(sprite, newLocation.getRow());
-    }
-
-    //to check if spaceship and meteorite move to the same location after keypress
-    public void check(Location location) {
-        if (location.hasMeteorite()) {
-            this.updateScene(false);
-        }
+        spaceship.move(spaceship, location, this.gridPane);
     }
 
     public void visitPlanet(Spaceship spaceship, Location location) {
@@ -163,15 +146,13 @@ public class MoveService {
     public void updateScene(Boolean winner) {
         VBox vBox = new VBox(20);
 
-//        TODO find out why label position does not work
-        timer.timerLabel.setLayoutY(400);
-        timer.timerLabel.setLayoutX(250);
+        //TODO fix timerlabel location, perhaps with a new thingy.
         timer.stop();
 
         if (winner) {
-            vBox.setStyle("-fx-background-image: url('wp2.jpg');");
+            vBox.setStyle("-fx-background-image: url('wp2.gif');");
         } else {
-            vBox.setStyle("-fx-background-image: url('wp3.jpg');");
+            vBox.setStyle("-fx-background-image: url('wp3.gif');");
         }
 
         vBox.getChildren().add(timer.timerLabel);
