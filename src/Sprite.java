@@ -2,7 +2,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-class Sprite extends Pane {
+abstract class Sprite extends Pane {
     protected Location location;
 
     ImageView image;

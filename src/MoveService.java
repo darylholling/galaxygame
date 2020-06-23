@@ -102,7 +102,7 @@ public class MoveService {
     private void moveMeteorites() {
         for (Meteorite meteorite : spriteService.getMeteorites()) {
             Location randomLocation = getRandom(meteorite);
-            while (randomLocation == null || randomLocation.hasMeteorite()) {
+            while (randomLocation == null || randomLocation.hasMeteorite() || randomLocation.hasPlanet()) {
                 randomLocation = getRandom(meteorite);
             }
 

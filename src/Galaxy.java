@@ -4,52 +4,52 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Galaxy {
-    int board_size = 12;
-    Location[][] location;
+    private Location[][] location;
 
-    public void configure(Group root, GridPane gp) {
-        this.initalizePlayfield(gp);
+    public void configure(Group root, GridPane gridPane) {
+        this.initalizePlayfield(gridPane);
 
-        gp.setPrefSize(600, 600);
-        gp.setStyle("-fx-background-image: url('wp1.gif');");
-        gp.setLayoutY(50);
+        gridPane.setPrefSize(600, 600);
+        gridPane.setStyle("-fx-background-image: url('wp1.gif');");
+        gridPane.setLayoutY(50);
 
-        root.getChildren().add(gp);
+        root.getChildren().add(gridPane);
     }
 
-    public Location[][] getPlayfield(){
+    public Location[][] getLocation(){
         return this.location;
     }
 
-    public void initalizePlayfield(GridPane gp) {
-        Location[][] location = new Location[board_size][board_size];
+    public void initalizePlayfield(GridPane gridPane) {
+        int boardSize = 12;
+        Location[][] location = new Location[boardSize][boardSize];
         //        initialize playfield
-        for (int i = 0; i < board_size; i++) {
-            for (int j = 0; j < board_size; j++) {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
                 location[i][j] = new Location(i, j);
                 Rectangle tile = new Rectangle(50, 50);
                 tile.setFill(Color.TRANSPARENT);
-                gp.add(tile, i, j);
+                gridPane.add(tile, i, j);
             }
         }
 
-        for (int i = 0; i < board_size; i++) {
-            for (int j = 0; j < board_size; j++) {
-                gp.setColumnIndex(location[i][j], i);
-                gp.setRowIndex(location[i][j], j);
-                if (i + 1 < board_size) {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                gridPane.setColumnIndex(location[i][j], i);
+                gridPane.setRowIndex(location[i][j], j);
+                if (i + 1 < boardSize) {
                     location[i][j].setRight(location[i + 1][j]);
                 }
 
-                if (i - 1 < board_size && i - 1 >= 0) {
+                if (i - 1 < boardSize && i - 1 >= 0) {
                     location[i][j].setLeft(location[i - 1][j]);
                 }
 
-                if (j + 1 < board_size) {
+                if (j + 1 < boardSize) {
                     location[i][j].setDown(location[i][j + 1]);
                 }
 
-                if (j - 1 < board_size && j - 1 >= 0) {
+                if (j - 1 < boardSize && j - 1 >= 0) {
                     location[i][j].setUp(location[i][j - 1]);
                 }
             }
