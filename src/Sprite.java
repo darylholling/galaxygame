@@ -4,8 +4,7 @@ import javafx.scene.layout.Pane;
 
 abstract class Sprite extends Pane {
     protected Location location;
-
-    ImageView image;
+    private ImageView image;
 
     public Sprite(String imageName) {
         Image image = new Image(imageName);
@@ -19,10 +18,6 @@ abstract class Sprite extends Pane {
     public void setLocation(Location location) {
         this.location = location;
         this.location.addSprite(this);
-    }
-
-    public ImageView getImage() {
-        return image;
     }
 
     public void setImage(ImageView image) {

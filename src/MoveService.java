@@ -25,7 +25,6 @@ public class MoveService {
     }
 
     public void initiateMoveListener(Scene scene) {
-
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
