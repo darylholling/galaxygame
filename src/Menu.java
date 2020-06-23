@@ -17,11 +17,12 @@ import java.io.File;
 public class Menu {
     Scene scene1, scene2;
     MediaPlayer mediaPlayer;
-    Group root = new Group();
-    Timer timer = new Timer(root);
+    SpriteService spriteService;
+    Game game;
 
-
-    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer) throws Exception {
+    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer, SpriteService spriteService, Game game) throws Exception {
+        this.spriteService = spriteService;
+        this.game = game;
 
         String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
@@ -53,6 +54,9 @@ public class Menu {
 
         Button easy = new Button("Easy");
         easy.setOnAction(e -> {
+            System.out.println("buttonclick");
+            this.startGame(14, 15, stage, gameScene);
+
             stage.setScene(gameScene);
             timer.start();
         });
@@ -75,5 +79,11 @@ public class Menu {
 
                 stage.setScene(scene1);
         stage.show();
+    }
+
+    public void startGame(Integer planetQuantity, Integer meteoriteQuantity, Stage stage, Scene scene){
+        this.spriteService.setPlanetQuantity(planetQuantity);
+        this.spriteService.setMeteoriteQuantity(meteoriteQuantity);
+        this.game.startgame(stage, scene);
     }
 }

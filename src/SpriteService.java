@@ -2,14 +2,35 @@ import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 
 public class SpriteService {
-    int planetQuantity = 4;
+//    Menu menu = new Menu ();
     GridPane gridPane;
     Location[][] playfield;
     Spaceship spaceship = new Spaceship();
     ArrayList<Meteorite> meteorites = new ArrayList<>();
     Boolean wormholeInitialized = false;
+    int planetQuantity;
+    int meteoriteQuantity;
+
+    public int getPlanetQuantity() {
+        return planetQuantity;
+    }
+
+    public void setPlanetQuantity(int planetQuantity) {
+    this.planetQuantity = planetQuantity;
+    }
+
+    public int getMeteoriteQuantity() {
+        return meteoriteQuantity;
+    }
+
+    public void setMeteoriteQuantity(int meteoriteQuantity) {
+        this.meteoriteQuantity = meteoriteQuantity;
+    }
+
+
 
     public void configure(GridPane gridPane, Location[][] playfield){
+        System.out.println("spriteconfigure");
         this.playfield = playfield;
         this.gridPane = gridPane;
 
@@ -30,8 +51,9 @@ public class SpriteService {
 
     public void initializeSprites(){
         this.initializeSpaceShip();
-        this.addSprite(planetQuantity, "planet");
-        this.addSprite(5, "meteorite");
+        this.addSprite(getPlanetQuantity(), "planet");
+        System.out.println("klklk");
+        this.addSprite(getMeteoriteQuantity(), "meteorite");
     }
 
     private void initializeSpaceShip(){
@@ -71,5 +93,8 @@ public class SpriteService {
                 i++;
             }
         }
+    }
+
+    public void setPlanetQuantity() {
     }
 }

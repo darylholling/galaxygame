@@ -15,14 +15,19 @@ public class Game extends Application {
 
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(root, 600, 650);
-        menu.initalize(stage, gridPane, scene, timer);
+        menu.initalize(stage, gridPane, scene, timer, spriteService,this);
 
+
+//        timer.start();
+//
+//        stage.setScene(scene);
+//        stage.show();
+    }
+
+    public void startgame(Stage stage, Scene scene){
         galaxy.configure(root, gridPane);
         spriteService.configure(gridPane, galaxy.getPlayfield());
         moveService.configure(stage, scene, spriteService, gridPane, timer);
-        timer.start();
 
-        stage.setScene(scene);
-        stage.show();
     }
 }

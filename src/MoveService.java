@@ -154,7 +154,7 @@ public class MoveService {
             spaceship.setPlanetsVisited(spaceship.getPlanetsVisited() + 1);
         }
 
-        if (spaceship.getPlanetsVisited() == spriteService.planetQuantity && !this.spriteService.isWormholeInitialized()) {
+        if (spaceship.getPlanetsVisited() == spriteService.getPlanetQuantity() && !this.spriteService.isWormholeInitialized()) {
             this.spriteService.addSprite(1, "wormhole");
         }
     }
