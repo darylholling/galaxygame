@@ -30,7 +30,7 @@ public class SpriteService {
 
 
     public void configure(GridPane gridPane, Location[][] playfield){
-        System.out.println("spriteconfigure");
+
         this.playfield = playfield;
         this.gridPane = gridPane;
 
@@ -52,7 +52,6 @@ public class SpriteService {
     public void initializeSprites(){
         this.initializeSpaceShip();
         this.addSprite(getPlanetQuantity(), "planet");
-        System.out.println("klklk");
         this.addSprite(getMeteoriteQuantity(), "meteorite");
     }
 

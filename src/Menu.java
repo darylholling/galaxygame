@@ -54,16 +54,24 @@ public class Menu {
 
         Button easy = new Button("Easy");
         easy.setOnAction(e -> {
-            System.out.println("buttonclick");
-            this.startGame(14, 15, stage, gameScene);
+            this.startGame(3, 5, stage, gameScene);
 
             stage.setScene(gameScene);
             timer.start();
         });
         Button medium = new Button("Medium");
-//      medium.setOnAction(e->stage.setScene(scene2));
+        medium.setOnAction(e-> {
+        this.startGame(5, 9, stage, gameScene);
+            stage.setScene(gameScene);
+            timer.start();
+        });
         Button hard = new Button("Hard");
-//      hard.setOnAction(e->stage.setScene(scene2));
+        hard.setOnAction(e-> {
+        this.startGame(7, 13, stage, gameScene);
+            stage.setScene(gameScene);
+            timer.start();
+        });
+
         Button goBack = new Button("Go back");
         goBack.setOnAction(e -> stage.setScene(scene1));
 
