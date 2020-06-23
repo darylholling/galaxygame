@@ -21,8 +21,8 @@ public class Game extends Application {
         spriteService.configure(gridPane, galaxy.getLocation());
         moveService.configure(stage, scene, spriteService, gridPane, timer);
         timer.start();
-
-        stage.setScene(scene);
-        stage.show();
+//
+//        stage.setScene(scene);
+//        stage.show();
     }
 }
