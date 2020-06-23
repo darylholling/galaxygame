@@ -94,6 +94,4 @@ public class SpriteService {
         }
     }
 
-    public void setPlanetQuantity() {
-    }
 }
