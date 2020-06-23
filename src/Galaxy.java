@@ -57,5 +57,4 @@ public class Galaxy {
 
         this.location = location;
     }
-
 }

@@ -12,8 +12,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
-
-
 public class Menu {
     Scene scene1, scene2;
     MediaPlayer mediaPlayer;
@@ -22,7 +20,6 @@ public class Menu {
 
 
     public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer) throws Exception {
-
         String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
@@ -73,7 +70,7 @@ public class Menu {
         layout2.setStyle("-fx-background-image: url('galaxy-menu.png');");
         scene2 = new Scene(layout2, 600, 600);
 
-                stage.setScene(scene1);
+        stage.setScene(scene1);
         stage.show();
     }
 }

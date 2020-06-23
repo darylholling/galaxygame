@@ -54,16 +54,8 @@ public class Location extends Pane {
         return column;
     }
 
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
     public int getRow() {
         return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
     }
 
     public boolean hasSprite() {
@@ -144,10 +136,6 @@ public class Location extends Pane {
 
     public Sprite getSprite() {
         return sprites.get(0);
-    }
-
-    public ArrayList<Sprite> getSprites() {
-        return sprites;
     }
 
     public void addSprite(Sprite sprite) {

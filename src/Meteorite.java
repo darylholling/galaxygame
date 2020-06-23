@@ -6,10 +6,10 @@ public class Meteorite extends Sprite implements MovableInterface {
     }
 
     @Override
-    public void move(Sprite sprite, Location location, MoveService moveService) {
+    public void move(Sprite sprite, Location location, GridPane gridPane) {
         sprite.getLocation().removeSprite(sprite);
         sprite.setLocation(location);
-        moveService.gridPane.setColumnIndex(sprite, location.getColumn());
-        moveService.gridPane.setRowIndex(sprite, location.getRow());
+        gridPane.setColumnIndex(sprite, location.getColumn());
+        gridPane.setRowIndex(sprite, location.getRow());
     }
 }

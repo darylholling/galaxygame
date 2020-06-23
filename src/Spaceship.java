@@ -1,3 +1,5 @@
+import javafx.scene.layout.GridPane;
+
 public class Spaceship extends Sprite implements MovableInterface {
     Integer planetsVisited = 0;
 
@@ -14,21 +16,10 @@ public class Spaceship extends Sprite implements MovableInterface {
     }
 
     @Override
-    public void move(Sprite sprite, Location location, MoveService moveService) {
-        if (location.hasPlanet()) {
-            moveService.visitPlanet((Spaceship) sprite, location);
-            return;
-        } else if (location.hasMeteorite()) {
-            moveService.updateScene(false);
-            return;
-        } else if (location.hasWormhole()) {
-            moveService.visitWormhole();
-            return;
-        }
-
+    public void move(Sprite sprite, Location location, GridPane gridPane) {
         sprite.getLocation().removeSprite(sprite);
         sprite.setLocation(location);
-        moveService.gridPane.setColumnIndex(sprite, location.getColumn());
-        moveService.gridPane.setRowIndex(sprite, location.getRow());
+        gridPane.setColumnIndex(sprite, location.getColumn());
+        gridPane.setRowIndex(sprite, location.getRow());
     }
 }
