@@ -3,6 +3,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -15,22 +16,24 @@ import java.io.File;
 public class Menu {
     Scene scene1, scene2;
     MediaPlayer mediaPlayer;
-    Group root = new Group();
-    Timer timer = new Timer(root);
+    SpriteService spriteService;
+    Game game;
 
+    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer, SpriteService spriteService, Game game) throws Exception {
+        this.spriteService = spriteService;
+        this.game = game;
 
-    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer) throws Exception {
         String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
-//      mediaPlayer.play();
+//        mediaPlayer.play();
 
         stage.setTitle("Galaxy Quest!");
         Label welcome = new Label("Galaxy Quest!");
         welcome.setFont(Font.font("Verdana", 60));
         welcome.setTextFill(Color.WHITE);
 
-        VBox layout1 = new VBox(20);
+        VBox layoutWelcome = new VBox(20);
 
         Button startGame = new Button("Start the game!");
         startGame.setOnAction(e -> stage.setScene(scene2));
@@ -40,23 +43,36 @@ public class Menu {
         Button exitGame = new Button("Quit game");
         exitGame.setOnAction(e -> stage.close());
 
-        layout1.getChildren().addAll(welcome, startGame, highScores, exitGame);
+        layoutWelcome.setAlignment(Pos.CENTER);
+        layoutWelcome.getChildren().addAll(welcome, startGame, highScores, exitGame);
+        layoutWelcome.setStyle("-fx-background-image: url('Space2.png');");
+        scene1 = new Scene(layoutWelcome, 600, 600);
 
-        layout1.setStyle("-fx-background-image: url('Space2.png');");
-        layout1.setAlignment(Pos.CENTER);
-        scene1 = new Scene(layout1, 600, 600);
-
-        VBox layout2 = new VBox(20);
+        VBox layoutChooseLevel = new VBox(20);
+        Label chooseLevel = new Label("Choose your level: ");
+        chooseLevel.setFont(Font.font("Verdana", 30));
+        chooseLevel.setTextFill(Color.WHITE);
 
         Button easy = new Button("Easy");
         easy.setOnAction(e -> {
+            this.startGame(3, 5, stage, gameScene);
+
             stage.setScene(gameScene);
             timer.start();
         });
         Button medium = new Button("Medium");
-//      medium.setOnAction(e->stage.setScene(scene2));
+        medium.setOnAction(e-> {
+        this.startGame(5, 9, stage, gameScene);
+            stage.setScene(gameScene);
+            timer.start();
+        });
         Button hard = new Button("Hard");
-//      hard.setOnAction(e->stage.setScene(scene2));
+        hard.setOnAction(e-> {
+        this.startGame(7, 13, stage, gameScene);
+            stage.setScene(gameScene);
+            timer.start();
+        });
+
         Button goBack = new Button("Go back");
         goBack.setOnAction(e -> stage.setScene(scene1));
 
@@ -65,12 +81,19 @@ public class Menu {
         hard.setMaxWidth(120);
         goBack.setMaxWidth(120);
 
-        layout2.setAlignment(Pos.CENTER);
-        layout2.getChildren().addAll(easy, medium, hard, goBack);
-        layout2.setStyle("-fx-background-image: url('galaxy-menu.png');");
-        scene2 = new Scene(layout2, 600, 600);
+        layoutChooseLevel.setAlignment(Pos.CENTER);
+        layoutChooseLevel.getChildren().addAll(chooseLevel,easy, medium, hard, goBack);
+        layoutChooseLevel.setStyle("-fx-background-image: url('galaxy-menu.png');");
+        scene2 = new Scene(layoutChooseLevel, 600, 600);
 
         stage.setScene(scene1);
         stage.show();
     }
+
+    public void startGame(Integer planetQuantity, Integer meteoriteQuantity, Stage stage, Scene scene){
+        this.spriteService.setPlanetQuantity(planetQuantity);
+        this.spriteService.setMeteoriteQuantity(meteoriteQuantity);
+        this.game.startgame(stage, scene);
+    }
+
 }

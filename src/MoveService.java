@@ -149,6 +149,8 @@ public class MoveService {
         timer.stop();
 
         if (winner) {
+            vBox.setStyle("-fx-background-image: url('wp2.jpg');");
+
             vBox.setStyle("-fx-background-image: url('wp2.gif');");
         } else {
             vBox.setStyle("-fx-background-image: url('wp3.gif');");
