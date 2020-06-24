@@ -162,8 +162,8 @@ public class Game extends Application {
             header.setTextFill(Color.RED);
             header.setStyle("-fx-font: 50 fantasy;");
             highScoreBox.getChildren().add(header);
-            goBack.setLayoutX(0);
-            goBack.setLayoutY(0); // needed cus layout changed after choosing start game
+            goBack.setLayoutX(270);
+            goBack.setLayoutY(3); // needed cus layout changed after choosing start game
 
             for (Integer number : numbers) {
                 Label label = new Label();
