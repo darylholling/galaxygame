@@ -27,7 +27,6 @@ public class Menu {
 //        int answer = Integer.parseInt(keyboard.nextLine());
 //        int answer2 = Integer.parseInt(keyboard.nextLine());
 
-    public void initalize(Stage stage, GridPane gridPane, Scene gameScene, Timer timer) throws Exception {
         String musicFile = "src\\Star Wars.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
