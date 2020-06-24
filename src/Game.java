@@ -68,7 +68,7 @@ public class Game extends Application {
 
             layoutWelcome.setAlignment(Pos.CENTER);
             layoutWelcome.getChildren().addAll(welcome, startGame, highScores, exitGame);
-            layoutWelcome.setStyle("-fx-background-image: url('Space2.png');");
+            layoutWelcome.setStyle("-fx-background-image: url('Space2.jpg');");
             scene1 = new Scene(layoutWelcome, 600, 600);
 
             VBox layoutChooseLevel = new VBox(20);
@@ -100,6 +100,7 @@ public class Game extends Application {
             scene2 = new Scene(layoutChooseLevel, 600, 600);
 
             stage.setScene(scene1);
+            stage.setResizable(false);
             stage.show();
         }
 
@@ -152,7 +153,7 @@ public class Game extends Application {
 
             Group highScoreGroup = new Group();
             VBox highScoreBox = new VBox();
-            highScoreBox.setStyle("-fx-background-image: url('Space2.png');");
+            highScoreBox.setStyle("-fx-background-image: url('Space2.jpg');");
             highScoreBox.setMinWidth(600);
             highScoreBox.setMinHeight(600);
             highScoreBox.setAlignment(Pos.BASELINE_CENTER);
