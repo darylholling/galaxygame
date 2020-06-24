@@ -173,6 +173,7 @@ public class MoveService {
 
         if (winner) {
             vBox.setStyle("-fx-background-image: url('wp2.jpg');");
+
         } else {
             vBox.setStyle("-fx-background-image: url('wp3.jpg');");
         }

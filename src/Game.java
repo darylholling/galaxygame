@@ -14,7 +14,7 @@ public class Game extends Application {
     Menu menu = new Menu();
     MoveService moveService = new MoveService();
     SpriteService spriteService = new SpriteService();
-    ArrayList<Game> highScores = new ArrayList<>();
+
 
 
     public void start(Stage stage) throws Exception {
