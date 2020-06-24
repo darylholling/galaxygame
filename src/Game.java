@@ -162,7 +162,8 @@ public class Game extends Application {
             header.setTextFill(Color.RED);
             header.setStyle("-fx-font: 50 fantasy;");
             highScoreBox.getChildren().add(header);
-            goBack.setAlignment(Pos.TOP_LEFT);
+            goBack.setLayoutX(0);
+            goBack.setLayoutY(0);
 
             for (Integer number : numbers) {
                 Label label = new Label();
