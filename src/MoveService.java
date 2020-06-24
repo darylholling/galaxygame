@@ -5,6 +5,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MoveService {
@@ -31,39 +36,45 @@ public class MoveService {
                     case UP:
                     case W:
                         Location up = spaceship.getLocation().getUp();
-                        moveMeteorites();
 
                         if (up != null) {
                             moveSpaceShip(up, spaceship);
                         }
+
+                        moveMeteorites();
+
                         break;
                     case DOWN:
                     case S:
                         Location down = spaceship.getLocation().getDown();
-                        moveMeteorites();
 
                         if (down != null) {
                             moveSpaceShip(down, spaceship);
                         }
+
+                        moveMeteorites();
+
                         break;
                     case LEFT:
                     case A:
                         Location left = spaceship.getLocation().getLeft();
-                        moveMeteorites();
 
                         if (left != null) {
                             moveSpaceShip(left, spaceship);
                         }
+
+                        moveMeteorites();
+
                         break;
                     case RIGHT:
                     case D:
                         Location right = spaceship.getLocation().getRight();
-
-                        moveMeteorites();
-
                         if (right != null) {
                             moveSpaceShip(right, spaceship);
                         }
+
+                        moveMeteorites();
+
                         break;
                 }
             }
@@ -149,9 +160,17 @@ public class MoveService {
         timer.stop();
 
         if (winner) {
-            vBox.setStyle("-fx-background-image: url('wp2.jpg');");
-
             vBox.setStyle("-fx-background-image: url('wp2.gif');");
+            try(
+                FileWriter fw = new FileWriter("highscore.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(timer.time);
+            } catch (IOException e) {
+                System.out.println("fix your exception!!");
+                //exception handling left as an exercise for the reader
+            }
         } else {
             vBox.setStyle("-fx-background-image: url('wp3.gif');");
         }
