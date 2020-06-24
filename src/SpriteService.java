@@ -27,8 +27,6 @@ public class SpriteService {
         this.meteoriteQuantity = meteoriteQuantity;
     }
 
-
-
     public void configure(GridPane gridPane, Location[][] playfield) {
         this.playfield = playfield;
         this.gridPane = gridPane;
