@@ -1,14 +1,31 @@
 import javafx.scene.layout.GridPane;
-
 import java.util.ArrayList;
 
 public class SpriteService {
-    public int planetQuantity = 4;
-    private GridPane gridPane;
-    private Location[][] playfield;
-    public Spaceship spaceship = new Spaceship();
-    private ArrayList<Meteorite> meteorites = new ArrayList<>();
-    private Boolean wormholeInitialized = false;
+//    Menu menu = new Menu ();
+    GridPane gridPane;
+    Location[][] playfield;
+    Spaceship spaceship = new Spaceship();
+    ArrayList<Meteorite> meteorites = new ArrayList<>();
+    Boolean wormholeInitialized = false;
+    int planetQuantity;
+    int meteoriteQuantity;
+
+    public int getPlanetQuantity() {
+        return planetQuantity;
+    }
+
+    public void setPlanetQuantity(int planetQuantity) {
+    this.planetQuantity = planetQuantity;
+    }
+
+    public int getMeteoriteQuantity() {
+        return meteoriteQuantity;
+    }
+
+    public void setMeteoriteQuantity(int meteoriteQuantity) {
+        this.meteoriteQuantity = meteoriteQuantity;
+    }
 
     public void configure(GridPane gridPane, Location[][] playfield) {
         this.playfield = playfield;
@@ -17,7 +34,7 @@ public class SpriteService {
         this.initializeSprites();
     }
 
-    public Spaceship getSpaceship() {
+    public Spaceship getSpaceship(){
         return this.spaceship;
     }
 
@@ -25,17 +42,17 @@ public class SpriteService {
         return this.meteorites;
     }
 
-    public Boolean isWormholeInitialized() {
+    public Boolean isWormholeInitialized(){
         return this.wormholeInitialized;
     }
 
-    public void initializeSprites() {
+    public void initializeSprites(){
         this.initializeSpaceShip();
-        this.addSprite(planetQuantity, "planet");
-        this.addSprite(5, "meteorite");
+        this.addSprite(getPlanetQuantity(), "planet");
+        this.addSprite(getMeteoriteQuantity(), "meteorite");
     }
 
-    private void initializeSpaceShip() {
+    private void initializeSpaceShip(){
         spaceship.setLocation(playfield[0][0]);
         this.gridPane.add(spaceship, spaceship.getLocation().getColumn(), spaceship.getLocation().getRow());
     }
@@ -51,7 +68,7 @@ public class SpriteService {
                 switch (string) {
                     case "meteorite":
                         anySprite = new Meteorite();
-                        meteorites.add((Meteorite) anySprite);
+                        meteorites.add((Meteorite)anySprite);
                         break;
                     case "planet":
                         anySprite = new Planet();
