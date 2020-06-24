@@ -41,9 +41,7 @@ public class Timer extends AnimationTimer {
                 "-fx-background-image:url('wp1.gif') ");
 
         HBox hb = new HBox();
-        // Add the label and timerLabel to the VBox
         hb.getChildren().addAll(timerLabel);
-        // Add the HBox to the root component
         root.getChildren().add(hb);
     }
 }

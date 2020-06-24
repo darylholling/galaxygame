@@ -9,7 +9,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MoveService {
@@ -156,7 +155,6 @@ public class MoveService {
     public void updateScene(Boolean winner) {
         VBox vBox = new VBox(20);
 
-        //TODO fix timerlabel location, perhaps with a new thingy.
         timer.stop();
 
         if (winner) {
@@ -168,8 +166,7 @@ public class MoveService {
             {
                 out.println(timer.time);
             } catch (IOException e) {
-                System.out.println("fix your exception!!");
-                //exception handling left as an exercise for the reader
+                System.out.println("Ik ben kapot");
             }
         } else {
             vBox.setStyle("-fx-background-image: url('wp3.gif');");
