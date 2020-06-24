@@ -100,7 +100,7 @@ public class Game extends Application {
             scene2 = new Scene(layoutChooseLevel, 600, 600);
 
             stage.setScene(scene1);
-            stage.setResizable(false);
+            stage.setResizable(false); // make game window not resizable
             stage.show();
         }
 
@@ -163,7 +163,7 @@ public class Game extends Application {
             header.setStyle("-fx-font: 50 fantasy;");
             highScoreBox.getChildren().add(header);
             goBack.setLayoutX(0);
-            goBack.setLayoutY(0);
+            goBack.setLayoutY(0); // needed cus layout changed after choosing start game
 
             for (Integer number : numbers) {
                 Label label = new Label();
