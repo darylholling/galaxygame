@@ -51,7 +51,15 @@ public class Game extends Application {
             welcome.setTextFill(Color.WHITE);
 
             Button goBack = new Button("Go back");
-            goBack.setOnAction(e -> stage.setScene(scene1));
+            VBox layoutChooseLevel = new VBox(20);
+
+            goBack.setOnAction(e -> {
+                if (!layoutChooseLevel.getChildren().contains(goBack)) {
+                    layoutChooseLevel.getChildren().add(goBack);
+                }
+
+                stage.setScene(scene1);
+            });
 
             VBox layoutWelcome = new VBox(20);
 
@@ -71,7 +79,6 @@ public class Game extends Application {
             layoutWelcome.setStyle("-fx-background-image: url('Space2.jpg');");
             scene1 = new Scene(layoutWelcome, 600, 600);
 
-            VBox layoutChooseLevel = new VBox(20);
             Label chooseLevel = new Label("Choose your level: ");
             chooseLevel.setFont(Font.font("Verdana", 30));
             chooseLevel.setTextFill(Color.WHITE);
@@ -95,12 +102,13 @@ public class Game extends Application {
             goBack.setMaxWidth(120);
 
             layoutChooseLevel.setAlignment(Pos.CENTER);
+            System.out.println(goBack);
             layoutChooseLevel.getChildren().addAll(chooseLevel, easy, medium, hard, goBack);
             layoutChooseLevel.setStyle("-fx-background-image: url('galaxy-menu.png');");
             scene2 = new Scene(layoutChooseLevel, 600, 600);
 
             stage.setScene(scene1);
-            stage.setResizable(false); // make game window not resizable
+            stage.setResizable(false);
             stage.show();
         }
 
@@ -163,7 +171,7 @@ public class Game extends Application {
             header.setStyle("-fx-font: 50 fantasy;");
             highScoreBox.getChildren().add(header);
             goBack.setLayoutX(270);
-            goBack.setLayoutY(3); // needed cus layout changed after choosing start game
+            goBack.setLayoutY(3);
 
             for (Integer number : numbers) {
                 Label label = new Label();
