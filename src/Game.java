@@ -102,7 +102,6 @@ public class Game extends Application {
             goBack.setMaxWidth(120);
 
             layoutChooseLevel.setAlignment(Pos.CENTER);
-            System.out.println(goBack);
             layoutChooseLevel.getChildren().addAll(chooseLevel, easy, medium, hard, goBack);
             layoutChooseLevel.setStyle("-fx-background-image: url('galaxy-menu.png');");
             scene2 = new Scene(layoutChooseLevel, 600, 600);
