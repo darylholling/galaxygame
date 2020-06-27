@@ -2,7 +2,6 @@ import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 
 public class SpriteService {
-//    Menu menu = new Menu ();
     GridPane gridPane;
     Location[][] playfield;
     Spaceship spaceship = new Spaceship();
