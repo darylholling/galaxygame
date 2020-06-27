@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -43,7 +44,7 @@ public class Game extends Application {
             String musicFile = "src\\Star Wars.mp3";
             Media sound = new Media(new File(musicFile).toURI().toString());
             mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.play();
+//            mediaPlayer.play();
 
             stage.setTitle("Galaxy Quest!");
             Label welcome = new Label("Galaxy Quest!");
@@ -52,13 +53,11 @@ public class Game extends Application {
 
             Button goBack = new Button("Go back");
             VBox layoutChooseLevel = new VBox(20);
+            moveService.setButtonGoBack(goBack);
 
             goBack.setOnAction(e -> {
-                if (!layoutChooseLevel.getChildren().contains(goBack)) {
-                    layoutChooseLevel.getChildren().add(goBack);
-                }
-
-                stage.setScene(scene1);
+                stage.close();
+                Platform.runLater( () -> new Game().start( new Stage() ) );
             });
 
             VBox layoutWelcome = new VBox(20);

@@ -1,5 +1,6 @@
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -17,6 +18,7 @@ public class MoveService {
     SpriteService spriteService;
     Timer timer;
     Stage stage;
+    Button goBack;
 
     public void configure(Stage stage, Scene scene, SpriteService spriteService, GridPane gridPane, Timer timer) {
         this.spaceship = spriteService.getSpaceship();
@@ -24,6 +26,7 @@ public class MoveService {
         this.spriteService = spriteService;
         this.timer = timer;
         this.stage = stage;
+
 
         this.initiateMoveListener(scene);
     }
@@ -172,11 +175,13 @@ public class MoveService {
             vBox.setStyle("-fx-background-image: url('wp3.gif');");
         }
 
-        vBox.getChildren().add(timer.timerLabel);
-
+        vBox.getChildren().addAll(timer.timerLabel, this.goBack);
         Scene scene = new Scene(vBox, 600, 600);
 
         stage.setScene(scene);
+    }
+    public void setButtonGoBack(Button goBack) {
+        this.goBack = goBack;
     }
 }
 
