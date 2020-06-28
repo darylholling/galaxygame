@@ -125,8 +125,8 @@ public class MoveService {
             meteorite.move(meteorite, randomLocation, this.gridPane);
         }
     }
-
-    private void moveSpaceShip(Location location, Spaceship spaceship) {
+//   made public for test
+    public void moveSpaceShip(Location location, Spaceship spaceship) {
         if (location.hasPlanet()) {
             visitPlanet(spaceship, location);
         } else if (location.hasMeteorite()) {
