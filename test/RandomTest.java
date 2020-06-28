@@ -1,11 +1,10 @@
-
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.layout.GridPane;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class GetRandomTest {
+public class RandomTest {
     JFXPanel panel = new JFXPanel();
     SpriteService spriteService = new SpriteService();
     MoveService moveService = new MoveService();
@@ -15,7 +14,7 @@ class GetRandomTest {
 
     //check if meteorites move randomly
     @Test
-    void checkGetRandom() {
+    public void checkGetRandom() {
         galaxy.configure(root, gridPane);
         spriteService.configure(gridPane, galaxy.getLocation());
 

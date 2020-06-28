@@ -2,10 +2,9 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.layout.GridPane;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-
-class MeteoritesAmountTest {
+public class MeteoriteAmountTest {
     JFXPanel panel = new JFXPanel();
     SpriteService spriteService = new SpriteService();
     Galaxy galaxy = new Galaxy();
@@ -13,8 +12,7 @@ class MeteoritesAmountTest {
     GridPane gridPane = new GridPane();
 
     @Test
-    //checks the amount of meteorites added to playfield at the start of the game.
-    void checkAmountOfMeteorites() {
+    public void checkAmountOfMeteorites() {
         galaxy.configure(root, gridPane);
         spriteService.setMeteoriteQuantity(5);
         spriteService.configure(gridPane, galaxy.getLocation());
