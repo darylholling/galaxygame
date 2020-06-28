@@ -125,8 +125,8 @@ public class MoveService {
             meteorite.move(meteorite, randomLocation, this.gridPane);
         }
     }
-//   made public for test
-    public void moveSpaceShip(Location location, Spaceship spaceship) {
+
+    private void moveSpaceShip(Location location, Spaceship spaceship) {
         if (location.hasPlanet()) {
             visitPlanet(spaceship, location);
         } else if (location.hasMeteorite()) {
@@ -162,15 +162,7 @@ public class MoveService {
 
         if (winner) {
             vBox.setStyle("-fx-background-image: url('wp2.gif');");
-            try(
-                FileWriter fw = new FileWriter("highscore.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw))
-            {
-                out.println(timer.time);
-            } catch (IOException e) {
-                System.out.println("Ik ben kapot");
-            }
+            this.writeHighScore(timer.time);
         } else {
             vBox.setStyle("-fx-background-image: url('wp3.gif');");
         }
@@ -179,6 +171,17 @@ public class MoveService {
         Scene scene = new Scene(vBox, 600, 600);
 
         stage.setScene(scene);
+    }
+
+    public void writeHighScore(long time) {
+        try (
+                FileWriter fw = new FileWriter("highscore.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw)) {
+            out.println(time);
+        } catch (IOException e) {
+            System.out.println("Ik ben kapot");
+        }
     }
     public void setButtonGoBack(Button goBack) {
         this.goBack = goBack;
