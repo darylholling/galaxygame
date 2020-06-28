@@ -52,7 +52,7 @@ public class SpriteService {
         this.addSprite(getMeteoriteQuantity(), "meteorite");
     }
 
-    private void initializeSpaceShip(){
+    public void initializeSpaceShip(){
         spaceship.setLocation(playfield[0][0]);
         this.gridPane.add(spaceship, spaceship.getLocation().getColumn(), spaceship.getLocation().getRow());
     }
