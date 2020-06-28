@@ -1,13 +1,7 @@
 import javafx.scene.Group;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.lang.reflect.Array;
-
-import static org.junit.Assert.*;
 
 public class GalaxyTest {
     GridPane gridPane = new GridPane();
